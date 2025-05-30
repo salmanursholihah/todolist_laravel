@@ -84,6 +84,3 @@ Route::get ('/',function(){
 
 // Admin Dashboard
 Route::middleware(['auth', 'is_admin'])->get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
-
-//content dashboard admin
