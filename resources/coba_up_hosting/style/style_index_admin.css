@@ -1,0 +1,88 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+}
+
+header {
+  background-color: #2196f3;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.post-preview {
+  background: white;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border-left: 5px solid #2196f3;
+  border-radius: 5px;
+}
+
+.post-preview h2 a {
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.date {
+  font-size: 0.9em;
+  color: #666;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #eee;
+  font-size: 0.9em;
+  color: #555;
+}
+#sidebar {
+  width: 200px;
+  transition: width 0.3s;
+  overflow: hidden;
+  white-space: nowrap; /* Supaya teks tidak pecah */
+}
+
+#sidebar.hidden {
+  width: 0;
+  padding: 0;
+}
+#sidebar.hidden ul,
+#sidebar.hidden li,
+#sidebar.hidden a {
+  display: none; /* Sembunyikan semua menu saat sidebar di-hide */
+}
+.navbar {
+  display: flex;
+  background-color: rgb(157, 171, 171);
+}.content{
+  padding-left:250px;
+  margin-top:20px;
+}
+.card-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+  gap:10px;
+  margin-top:10px;
+}
+.card{
+  padding:20px;
+  border-radius:4px;
+  background : grey;
+  text-align:center;
+}
+.card i{
+  font-size: 40px;
+}
+.card p {
+  font-size:10px;
+  font-weight:bold;
+}
+

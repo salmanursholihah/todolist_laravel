@@ -1,0 +1,34 @@
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    header {
+        padding: 20px;
+        background-color: #25629f;
+        text-align: center;
+    }
+
+    #toggleSidebar {
+        margin: 10px;
+        background: #3498db;
+        color: #fff;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #toggleSidebar:hover {
+        background: #2980b9;
+    }
+
+    #sidebar {
+        transition: width 0.3s;
+    }
+
+    footer {
+        text-align: center;
+        padding: 15px;
+        background-color: #f1f1f1;
+        margin-top: 40px;
+    }
