@@ -1,0 +1,44 @@
+[04-Jun-2025 10:57:18 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'mytk4865_salma'@'localhost' (using password: YES) in /home/mytk4865/public_html/db.php:7
+Stack trace:
+#0 /home/mytk4865/public_html/db.php(7): mysqli_connect()
+#1 /home/mytk4865/public_html/login.php(2): include('/home/mytk4865/...')
+#2 {main}
+  thrown in /home/mytk4865/public_html/db.php on line 7
+[04-Jun-2025 10:57:40 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'mytk4865_salma'@'localhost' (using password: YES) in /home/mytk4865/public_html/db.php:7
+Stack trace:
+#0 /home/mytk4865/public_html/db.php(7): mysqli_connect()
+#1 /home/mytk4865/public_html/register.php(2): include('/home/mytk4865/...')
+#2 {main}
+  thrown in /home/mytk4865/public_html/db.php on line 7
+[04-Jun-2025 10:58:40 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'mytk4865_salma'@'localhost' (using password: YES) in /home/mytk4865/public_html/db.php:7
+Stack trace:
+#0 /home/mytk4865/public_html/db.php(7): mysqli_connect()
+#1 /home/mytk4865/public_html/register.php(2): include('/home/mytk4865/...')
+#2 {main}
+  thrown in /home/mytk4865/public_html/db.php on line 7
+[04-Jun-2025 10:59:25 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Access denied for user 'mytk4865_salma'@'localhost' (using password: YES) in /home/mytk4865/public_html/db.php:7
+Stack trace:
+#0 /home/mytk4865/public_html/db.php(7): mysqli_connect()
+#1 /home/mytk4865/public_html/login.php(2): include('/home/mytk4865/...')
+#2 {main}
+  thrown in /home/mytk4865/public_html/db.php on line 7
+[04-Jun-2025 15:30:17 Asia/Jakarta] PHP Warning:  require(/home/mytk4865/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/mytk4865/public_html/index.php on line 34
+[04-Jun-2025 15:30:17 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/mytk4865/public_html/../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mytk4865/public_html/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /home/mytk4865/public_html/index.php on line 34
+[04-Jun-2025 16:13:47 Asia/Jakarta] PHP Warning:  require(/home/mytk4865/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/mytk4865/public_html/clear.php on line 5
+[04-Jun-2025 16:13:47 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/mytk4865/public_html/../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mytk4865/public_html/clear.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/mytk4865/public_html/clear.php on line 5
+[04-Jun-2025 16:13:58 Asia/Jakarta] PHP Warning:  require(/home/mytk4865/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/mytk4865/public_html/clear.php on line 5
+[04-Jun-2025 16:13:58 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Failed opening required '/home/mytk4865/public_html/../vendor/autoload.php' (include_path='.:/opt/alt/php83/usr/share/pear:/opt/alt/php83/usr/share/php:/usr/share/pear:/usr/share/php') in /home/mytk4865/public_html/clear.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/mytk4865/public_html/clear.php on line 5
+[04-Jun-2025 16:15:12 Asia/Jakarta] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/mytk4865/todolist_laravel/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home/mytk4865/public_html/clear.php(12): Illuminate\Support\Facades\Facade::__callStatic()
+#1 {main}
+  thrown in /home/mytk4865/todolist_laravel/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335

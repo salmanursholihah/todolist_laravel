@@ -1,32 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Welcome to MyTodoList</title>
-    <link rel="stylesheet" href="{{asset('assets/style.css')}}"> <!-- Optional -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mytodo.my.id</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="{{ asset('assets/style/style_index.css') }}">
 </head>
 
 <body>
-    <header style="text-align: center;">
-        <h1>MyTodoList</h1>
-        <p>Mengelola tugas harianmu jadi lebih mudah dan menyenangkan.</p>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Selamat datang di mytodo.my.id</h1>
+            <p>Solusi cerdas untuk mengelola tugas harian anda.</p>
+            <a href="#" class="cta-button">Pelajari Lebih Lanjut</a>
+        </div>
     </header>
 
-    <section style="text-align: center; margin-top: 20px;">
-        <img src="https://i.pinimg.com/736x/13/44/88/1344881a0b7b7b4a766621adbaafa811.jpg" alt="Todo Illustration"
-            width="300">
+    <!-- Features Section -->
+    <section id="features" class="features">
         <h2>Fitur Unggulan</h2>
-        <ul style="list-style: none;">
-            <li>📝 Tambah & atur tugas dengan mudah</li>
-            <li>📆 Reminder harian</li>
-            <li>📊 Statistik produktivitas</li>
-        </ul>
+        <div class="feature-list">
+            <div class="feature">
+                <h3>Manajemen Data</h3>
+                <p>Kelola data Anda dengan aman dan mudah diakses.</p>
+            </div>
+            <div class="feature">
+                <h3>Reminder harian</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia, labore.</p>
+            </div>
+            <div class="feature">
+                <h3>Laporan Real-time</h3>
+                <p>Dapatkan analisis dan laporan kapan saja secara langsung.</p>
+            </div>
+        </div>
     </section>
 
-    <div style="text-align: center; margin-top: 30px;">
-        <a href="{{ route('login') }}">Login</a> |
-        <a href="{{ route('register') }}">Daftar Sekarang</a>
-    </div>
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Mulai Gunakan mytodo Sekarang</h2>
+        <p>Gabung dan jadikan tugas anda terkelola</p><br><br>
+        <a href="{{ route('register') }}" class="cta-button">Daftar Sekarang</a>
+        <a href="{{ route('login') }}" class="cta-button">Login</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 mytodo.my.id All rights reserved.</p>
+        <p>Email: support@mytodo.com</p>
+    </footer>
+
 </body>
 
 </html>

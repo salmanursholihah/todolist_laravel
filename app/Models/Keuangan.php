@@ -9,7 +9,7 @@ class Keuangan extends Model
 {
     use HasFactory;
 
-    protected $fillable= ['id','date','deskripsi','type','amount'];
+    protected $fillable= ['user_id','date','deskripsi','type','amount'];
 
     public function user()
     {

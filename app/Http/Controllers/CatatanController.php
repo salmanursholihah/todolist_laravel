@@ -13,39 +13,56 @@ public function index(){
     $catatans = Auth::user()->Catatans;
     return view ('catatan', compact('catatans'));
 }
+
+
 public function store(Request $request)
 {
     $request->validate([
-        'title' => 'required',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        'title' => 'required|string',
+        'description' => 'nullable|string',
+        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
     ]);
 
-    $filename = null;
-
-    if ($request->hasFile('image')) {
-        $file = $request->file('image');
-        $filename = time().'_'.$file->getClientOriginalName();
-        $file->move(public_path('laporan'), $filename); 
-    }
-
-    Catatan::create([
+    $catatan = Catatan::create([
         'title' => $request->title,
         'description' => $request->description,
-        'image' => $filename,
-        'user_id' => Auth::id(),
+        'user_id' => auth()->id(),
     ]);
+
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $image) {
+            $filename = time() . '_' . $image->getClientOriginalName();
+
+            $image->move(public_path('uploads'), $filename);
+
+            $catatan->images()->create([
+                'image_path' => 'uploads/' . $filename,
+            ]);
+        }
+    }
 
     return redirect()->back()->with('success', 'Catatan berhasil ditambahkan!');
 }
 
-public function update(Catatan $catatan){
-    $catatan->update();
-    return redirect()->back();
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'judul' => 'required',
+        'isi' => 'required',
+    ]);
+
+    $catatan = Catatan::findOrFail($id);
+    $catatan->judul = $request->judul;
+    $catatan->isi = $request->isi;
+    $catatan->save();
+
+    return redirect()->route('catatan.index')->with('success', 'Catatan berhasil diperbarui.');
 }
+
 public function destroy (Catatan $catatan){
 $catatan ->delete();
 return redirect()->back();
 
 }
-
 }

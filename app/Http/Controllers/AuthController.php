@@ -104,5 +104,14 @@ public function store(Request $request): RedirectResponse
             public function post(){
                 return view('auth.post');
             }
-    }
+
+                public function destroy($id)
+{
+    $user = User::findOrFail($id);
+    $user->delete(); // soft delete
+    return redirect()->route('users.index')->with('success', 'User dinonaktifkan.');
+}
+
+            }
+
     

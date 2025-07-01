@@ -1,4 +1,7 @@
 @extends('layouts.app_admin')
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/style/style_table_admin.css') }}">
+@endpush
 
 @section('title','dashboard')
 @section('content')
@@ -7,43 +10,39 @@
 <body>
 
 
-    <div class="container">
-        <div class="content">
-            <h2>Data User</h2>
-            <table>
-                <tr>
-                    <th>Nama</th>
-                    <th>Email</th>
-                </tr>
-                @foreach($users as $user)
-                <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                </tr>
-                @endforeach
-            </table>
-
-            <h2>Data Tugas</h2>
-            <ul>
-                @foreach($tasks as $task)
-                <li>{{ $task->title }} - dibuat oleh User ID: {{ $task->user_id }}</li>
-                @endforeach
-            </ul>
-            <h2>Data catatan masuk</h2>
-            <ul>
-                @foreach($catatans as $catatan)
-                <li>{{ $catatan->title }} - dibuat oleh User ID: {{ $catatan->user_id }}</li>
-                @endforeach
-            </ul>
-
-
-            <h2>laporan keuangan</h2>
-            <ul>
-                @foreach($keuangans as $keuangan)
-                <li>{{ $keuangan->deskripsi }} -laporan tanggal {{ $keuangan->date }}</li>
-                @endforeach
-            </ul>
+    <div class="card-container">
+        <div class="card">
+            <a href="tasks/index" style="text-decoration: none; color: inherit;">
+                <i class="fa-solid fa-users"></i>
+                <h4>Laporan Task</h4>
+                <p style="font-weight:bold; font-size:10pt;">{{ $tasks->count() }} Data</p>
+                {{-- hanya tampil jumlah --}}
+            </a>
         </div>
+
+        <div class="card">
+            <a href="users/index" style="text-decoration: none; color: inherit;">
+                <i class="fa-solid fa-users"></i>
+                <h4>Users</h4>
+                <p style="font-weight:bold; font-size:10pt;">{{ $users->count() }} Data</p>
+                {{-- hanya tampil jumlah --}}
+            </a>
+        </div>
+
+
+        <div class="card">
+            <a href="keuangans/index" style="text-decoration: none; color: inherit;">
+                <i class="fa-solid fa-calculator"></i>
+                <h4>Keuangan</h4>
+                <p style="font-weight:bold; font-size:10pt;">{{ $keuangans->count() }} Data</p>
+                {{-- hanya tampil jumlah --}}
+            </a>
+        </div>
+    </div>
+
+
+    <div class="content">
+
     </div>
 
     @endsection

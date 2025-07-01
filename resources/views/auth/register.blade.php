@@ -19,7 +19,6 @@
 
     <form action="{{ route('register') }}" method="POST">
         @csrf
-
         <div class="mb-3">
             <label for="name" class="form-label">Nama</label>
             <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control" required autofocus>
@@ -43,5 +42,8 @@
 
         <button type="submit" class="btn btn-primary w-100">Daftar</button>
     </form>
+    <a href="login">sudah punya akun??</a>
+
+</div>
 </div>
 @endsection

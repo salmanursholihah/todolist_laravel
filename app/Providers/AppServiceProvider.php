@@ -21,8 +21,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        //
-    }
+public function boot()
+{
+    app()->bind('path.public', function() {
+        return base_path('public');
+    });
+}
+
 }

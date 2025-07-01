@@ -55,8 +55,10 @@
     </div>
 
     <!-- Footer -->
-    <footer style="text-align:center; margin-top:5px; margin-buttom:3px; background-color: #2196f3; color: white;">
-        <p>&copy; mytodo ~ 2025</p>
+   <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 mytodo.my.id All rights reserved.</p>
+        <p>Email: support@mytodo.com</p>
     </footer>
 
     <!-- JS -->

@@ -19,10 +19,12 @@
 
 <body>
     <!-- Header -->
-    <header class="text-center p-3 bg-light">
+    <header class="text-center py-3" style="background-color: #2196f3; color: white;">
         <h1>Mytodo</h1>
-        <p>catat perjalanan tugasmu dengan aplikasi todolist</p>
+        <p>Catat perjalanan tugasmu dengan aplikasi todolist</p>
     </header>
+
+
 
 
     <!-- Main Content -->
@@ -32,8 +34,10 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center mt-5 mb-3">
-        <p>&copy; mytodo ~ 2025</p>
+  <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 mytodo.my.id All rights reserved.</p>
+        <p>Email: support@mytodo.com</p>
     </footer>
 
     <!-- JS -->
