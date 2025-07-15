@@ -15,7 +15,7 @@ class CatatanExportController extends Controller
 {
 
     public function index(){
-        $user = User::all();
+        $users = User::all();
         return view('admin.catatans.index', compact('users'));
     }
     public function exportExcel()
@@ -45,12 +45,12 @@ class CatatanExportController extends Controller
     }
 
 
-public function exportPerUser($user_id)
+public function exportPerUser(Request $request)
 {
+    $user_id = $request->user_id ?? auth()->id();
     $user = User::findOrFail($user_id);
 
-    $catatans = Catatan::where('user_id', $user->user_id)->get();
-
+    $catatans = Catatan::where('user_id', $user->id)->get();
     $pdf = Pdf::loadView('catatans.export_user', compact('catatans', 'user'));
 
     return $pdf->download("catatan_{$user->name}.pdf");

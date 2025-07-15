@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('keuangans', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+    Schema::create('rekap_catatan_perbulan', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+    $table->integer('month'); // 1-12
+    $table->integer('year');
+    $table->text('summary')->nullable(); // Ringkasan narasi user
+    $table->timestamps();
+});
+
     }
 
     /**
@@ -25,8 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('keuangans', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

@@ -4,14 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Catatan;
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminCatatanController extends Controller
 {
-public function index()
+public function index(Request $request)
 {
-$catatans = Catatan::latest('images')->get(); // Semua catatan dari semua user
-return view('admin.catatans.index', compact('catatans'));
+    $users = User::all();
+
+    // FILTER default = bulan ini
+    $bulan = now()->format('m'); // contoh: 07
+    $tahun = now()->format('Y'); // contoh: 2025
+
+    $catatans = Catatan::whereMonth('created_at', $bulan)
+                ->whereYear('created_at', $tahun)
+                ->latest()
+                ->get();
+
+    return view('admin.catatans.index', compact('catatans', 'users', 'bulan', 'tahun'));
 }
+
 
 public function create()
 {
@@ -25,6 +38,10 @@ $request->validate([
 'description' => 'required|string',
 'image' => 'nullable|image|max:2048',
 // 'name' => 'nullable|string|max:100',
+'target' => 'required|string',
+'kendala' => 'required|string',
+'solusi' => 'required|string',
+
 ]);
 
 $imagePath = null;
@@ -38,6 +55,9 @@ Catatan::create([
 'image' => $imagePath,
 'user_id' => auth()->id(),
 // 'name' => $request->name ?? auth()->user()->name,
+'target' => $request->target,
+'kendala' => $request->kendala,
+'solusi' => $request->solusi,
 ]);
 
 return redirect()->route('admin.catatans.index')->with('success', 'Catatan berhasil ditambahkan');
@@ -55,6 +75,10 @@ $request->validate([
 'description' => 'required|string',
 'image' => 'nullable|image|max:2048',
 // 'name' => 'nullable|string|max:100',
+'target' => 'nullable|string',
+'kendala' => 'nullable|string',
+'solusi' => 'nullable|string',
+
 ]);
 
 $imagePath = $catatan->image;
@@ -67,6 +91,9 @@ $catatan->update([
 'description' => $request->description,
 'image' => $imagePath,
 // 'name' => $request->name ?? $catatan->name,
+'target' => $request->target,
+'kendala' => $request->kendala,
+'solusi' => $request->solusi,
 ]);
 
 return redirect()->route('admin.catatans.index')->with('success', 'Catatan berhasil diperbarui');
@@ -77,4 +104,63 @@ public function destroy(Catatan $catatan)
 $catatan->delete();
 return redirect()->route('admin.catatans.index')->with('success', 'Catatan berhasil dihapus');
 }
+    public function exportPDF()
+    {
+        $catatans = Catatan::all();
+        $pdf = Pdf::loadView('admin.catatans.pdf', compact('catatans'));
+        $pdf->setPaper('A4','landscape');
+
+        return $pdf->download('laporan_catatan.pdf');
+    }
+    public function exportPerBulan( request $request)
+    {
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $catatans = Catatan::whereMonth('created_at', $month)
+                            ->whereYear('created_at', $year)
+                            ->get();
+
+   $pdf = Pdf::loadView('admin.catatans.export', compact('catatans', 'month', 'year'));
+$pdf->setPaper('A4','landscape');
+    return $pdf->download("catatan_{$month}_{$year}.pdf");
+        
+    }
+
+
+// public function exportPerUser(Request $request)
+// {
+//     $id = $request->user_id ?? auth()->id();
+//     $user = User::findOrFail($id);
+
+//     $catatans = Catatan::where('user_id', $user->id)->get();
+
+//     if ($catatans->isEmpty()) {
+//         return redirect()->route('catatans.index')
+//                          ->with('error', 'Data tidak ditemukan.');
+//     }
+
+//     $pdf = Pdf::loadView('catatans.export_user', compact('catatans', 'user'));
+
+//     return $pdf->download("catatan_{$user->name}.pdf");
+// }
+public function exportPerUser(Request $request)
+{
+    $id = $request->user_id ?? auth()->id();
+    $user = User::findOrFail($id);
+
+    $catatans = Catatan::where('user_id', $user->id)->get();
+
+    if ($catatans->isEmpty()) {
+        // INI BENAR, karena route() akan panggil index()
+        return redirect()->route('admin.catatans.index')->with('error', 'Data tidak ditemukan.');
+    }
+
+    $pdf = Pdf::loadView('admin.catatans.export_user', compact('catatans', 'user'));
+$pdf->setPaper('A4','landscape');
+
+    return $pdf->download("catatan_{$user->name}.pdf");
+}
+
+
 }

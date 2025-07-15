@@ -17,6 +17,18 @@
             <input type="text" name="description" value="{{ old('description', $catatan->description) }}"
                 class="form-control" required><br>
         </div>
+        <div class="mb-3"> <label class="form-label">Target:</label>
+            <input type="text" name="target" value="{{ old('target', $catatan->target) }}" class="form-control"
+                required><br>
+        </div>
+        <div class="mb-3"> <label class="form-label">kendala:</label>
+            <input type="text" name="kendala" value="{{ old('kendala', $catatan->kendala) }}" class="form-control"
+                required><br>
+        </div>
+        <div class="mb-3"> <label class="form-label">solusi:</label>
+            <input type="text" name="solusi" value="{{ old('solusi', $catatan->solusi) }}" class="form-control"
+                required><br>
+        </div>
         <div class=" mb-3"> <label class="form-label">Gambar Lama:</label><br>
             @if ($catatan->image)
             <img src="{{ asset('storage/' . $catatan->image) }}" alt="Gambar catatan" width="150"><br>

@@ -8,61 +8,68 @@ use Illuminate\Support\Facades\Auth;
 
 class CatatanController extends Controller
 {
+    public function index()
+    {
+        $today = now();
+        $isEndOfMonth = $today->isSameDay($today->endOfMonth());
 
-public function index(){
-    $catatans = Auth::user()->Catatans;
-    return view ('catatan', compact('catatans'));
-}
+        // Ambil hanya catatan bulan ini
+        $catatans = Auth::user()
+            ->catatans()
+            ->where('periode', $today->format('Y-m'))
+            ->get();
 
+        // Sudah ada evaluasi bulanan?
+        $hasMonthly = Auth::user()
+            ->catatans()
+            ->where('periode', $today->format('Y-m'))
+            ->whereNotNull('kendala')
+            ->exists();
 
-public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string',
-        'description' => 'nullable|string',
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
-    ]);
+        $showMonthlyForm = $isEndOfMonth && !$hasMonthly;
 
-    $catatan = Catatan::create([
-        'title' => $request->title,
-        'description' => $request->description,
-        'user_id' => auth()->id(),
-    ]);
+        return view('catatan', compact('catatans', 'showMonthlyForm'));
+    }
+    
 
-    if ($request->hasFile('images')) {
-        foreach ($request->file('images') as $image) {
-            $filename = time() . '_' . $image->getClientOriginalName();
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'nullable|string',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kendala' => 'nullable|string',
+            'solusi' => 'nullable|string',
+            'target' => 'nullable|string',
+        ]);
 
-            $image->move(public_path('uploads'), $filename);
+        $catatan = Catatan::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => auth()->id(),
+            'kendala' => $request->kendala ?: null,
+            'solusi' => $request->solusi ?: null,
+            'target' => $request->target ?: null,
+            'periode' => now()->format('Y-m'),
+        ]);
 
-            $catatan->images()->create([
-                'image_path' => 'uploads/' . $filename,
-            ]);
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('uploads'), $filename);
+
+                $catatan->images()->create([
+                    'image_path' => 'uploads/' . $filename,
+                ]);
+            }
         }
+
+        return redirect()->back()->with('success', 'Catatan berhasil ditambahkan!');
     }
 
-    return redirect()->back()->with('success', 'Catatan berhasil ditambahkan!');
-}
-
-
-public function update(Request $request, $id)
-{
-    $request->validate([
-        'judul' => 'required',
-        'isi' => 'required',
-    ]);
-
-    $catatan = Catatan::findOrFail($id);
-    $catatan->judul = $request->judul;
-    $catatan->isi = $request->isi;
-    $catatan->save();
-
-    return redirect()->route('catatan.index')->with('success', 'Catatan berhasil diperbarui.');
-}
-
-public function destroy (Catatan $catatan){
-$catatan ->delete();
-return redirect()->back();
-
-}
+    public function destroy(Catatan $catatan)
+    {
+        $catatan->delete();
+        return redirect()->back();
+    }
 }

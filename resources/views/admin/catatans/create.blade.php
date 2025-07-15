@@ -23,6 +23,21 @@
         </div> @error('description') <small class="text-danger">{{ $message }}</small> @enderror
 
 
+        <div class="mb-3"><label class="form-label">Target:</label>
+            <input type="text" name="target" class="form-control" value="{{ old('target') }}" required>
+        </div> @error('target') <small class="text-danger">{{ $message }}</small> @enderror
+
+
+        <div class="mb-3"><label class="form-label">Permasalahan:</label>
+            <input type="text" name="kendala" class="form-control" value="{{ old('kendala') }}" required>
+        </div> @error('kendala') <small class="text-danger">{{ $message }}</small> @enderror
+
+
+        <div class="mb-3"><label class="form-label">Uraian penyelesaian:</label>
+            <input type="text" name="solusi" class="form-control" value="{{ old('solusi') }}" required>
+        </div> @error('solusi') <small class="text-danger">{{ $message }}</small> @enderror
+
+
         <div class="mb-3"><label class="form-label">Gambar:</label>
             <input type="file" name="image" class="form-control">
         </div> @error('image') <small class="text-danger">{{ $message }}</small> @enderror

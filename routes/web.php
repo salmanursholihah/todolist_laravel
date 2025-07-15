@@ -17,8 +17,11 @@ use App\Http\Controllers\AdminKeuanganController;
 use App\Http\Controllers\KeuanganExportController;
 use App\Http\Controllers\TaskExportController;
 use App\Http\Controllers\CatatanExportController;
+use App\Http\Controllers\PencapaianBulananController;
 use App\Http\Controllers\TasksExportController;
 use App\Http\Controllers\UsersExportController;
+use App\Http\Controllers\MonthlyReportController;
+use App\Http\Controllers\TestCatatanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,9 +111,12 @@ Route::get('/keuangan/export/excel', [KeuanganExportController::class, 'exportEx
 Route::get('/keuangan/export/pdf', [KeuanganExportController::class, 'exportPDF'])->name('keuangan.export.pdf');
 
 //routing export document
-Route::get('/catatan/export/excel', [CatatanExportController::class, 'exportExcel'])->name('catatan.export.excel');
-Route::get('/catatan/export/pdf', [CatatanExportController::class, 'exportPDF'])->name('catatan.export.pdf');
-Route::post('/export-catatan', [CatatanExportController::class, 'exportPerBulan' ])->name('export.perbulan');
+Route::get('/catatan/export/excel', [AdminCatatanController::class, 'exportExcel'])->name('catatan.export.excel');
+Route::get('/catatan/export/pdf', [AdminCatatanController::class, 'exportPDF'])->name('catatan.export.pdf');
+Route::post('/export-catatan', [AdminCatatanController::class, 'exportPerBulan' ])->name('export.perbulan');
+Route::post('export-catatan-peruser', [AdminCatatanController::class, 'exportPerUser'])->name('export.peruser');
+
+
 
 //routing export document
 Route::get('/tasks/export/excel', [TasksExportController::class, 'exportExcel'])->name('tasks.export.excel');
@@ -120,15 +126,6 @@ Route::get('/tasks/export/pdf', [TasksExportController::class, 'exportPDF'])->na
 //routing export document
 Route::get('/users/export/excel', [UsersExportController::class, 'exportExcel'])->name('users.export.excel');
 Route::get('/users/export/pdf', [UsersExportController::class, 'exportPDF'])->name('users.export.pdf');
-
-
-
-
-
-
-
-
-
 
 
 
@@ -172,4 +169,21 @@ Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')-
     Route::get('keuangans/{keuangan}/edit', [AdminKeuanganController::class, 'edit'])->name('keuangans.edit');
     Route::put('keuangans/{keuangan}', [AdminKeuanganController::class, 'update'])->name('keuangans.update');
     Route::delete('keuangans/{keuangan}', [AdminKeuanganController::class, 'destroy'])->name('keuangans.destroy');
+});
+
+// //rekap pencapaian bulanan
+// Route::get('/pencapaian_bulanan', [PencapaianBulananController::class, 'index'])->name('admin.pencapaians.index');
+// Route::post('/pencapaian_bulanan', [PencapaianBulananController::class, 'store'])->name('admin.pencapaians.store');
+
+
+///report
+Route::get('/monthly-report', [MonthlyReportController::class, 'index'])->name('monthly.report.index');
+Route::post('/monthly-report', [MonthlyReportController::class, 'store'])->name('monthly.report.store');
+
+
+
+//route
+Route::middleware(['auth', 'CheckRole:user'])->group(function(){
+   Route::get('/test/catatan', [TestCatatanController::class, 'index'])->name('test.catatans.index'); 
+   Route::post('/test/catatan', [TestCatatanController::class, 'store'])->name('test.catatans.store');
 });

@@ -1,53 +1,88 @@
 @extends('layouts.app')
 
-@section ('title', 'catatan')
-@section ('content')
+@section('title', 'Catatan')
+@section('content')
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<body>
 
-<div class="container" style="background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 800px; width: 100%; margin: auto;">
-       
-        <h2 style="font-family:arial; text-align:center; font-size:30pt; font-weight:bold;">Input catatan</h2>
-        <form action="{{ route('catatan.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <input type="text" name="title" placeholder="Masukkan judul" style="width: 100%; padding: 10px; border: 1px
-                    solid #ccc; border-radius: 4px; box-sizing: border-box; padding-top:20px;" />
-            <br><br>
-            <textarea name="description" placeholder="Masukkan catatan" style="width: 100%; padding: 10px; border: 1px
-                    solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
-            <br><br>
+<div class="container my-4">
 
+    <form id="multiStepForm" method="POST" action="{{ route('catatan.store') }}" enctype="multipart/form-data">
+        @csrf
 
-
-            <input type="file" name="images[]" style="width: 100%; padding: 10px; border: 1px
-                    solid #ccc; border-radius: 4px; box-sizing: border-box;" multiple />
-            <button type="submit"
-                style="width: 100%; padding: 10px; background-color: #4c82c0; color: white; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer; font-size: 16px;">Simpan</button>
-        </form>
-
-    </div>
-
-    <div class="content"
-        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; margin-top: 10px;">
-
-        @foreach ($catatans as $catatan)
-        <div
-            style="padding: 20px;border-radius: 4px;background: #f7f7f7; min-height: 300px; display: flex; flex-direction: column;justify-content: space-between;text-align: center;">
-            <div>
-                <h3 style="margin-top: 0; font-size: 20pt; color: black;">{{ $catatan->title }}</h3>
-                <p style="color: blue;">{{ $catatan->created_at }}</p>
-                <p style="color: black; max-height: 100px; overflow: auto;">
-                    {{ $catatan->description }}
-                </p>
+        <!-- STEP 1 -->
+        <div id="step-1">
+            <h3>Form Catatan Harian</h3>
+            <div class="mb-3">
+                <label>Judul</label>
+                <input type="text" name="title" class="form-control" placeholder="Judul" required>
             </div>
-          @foreach ($catatan->images as $image)
-    <img src="{{ asset($image->image_path) }}" width="100">
-@endforeach
+            <div class="mb-3">
+                <label>Deskripsi</label>
+                <textarea name="description" class="form-control" placeholder="Deskripsi" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label>Gambar</label>
+                <input type="file" name="images[]" class="form-control" multiple>
+            </div>
+            @if ($showMonthlyForm)
+            <button type="button" id="nextToMonthly" class="btn btn-primary">Lanjut Evaluasi Bulanan</button>
+            @endif
+            <button type="submit" id="submitDailyOnly" class="btn btn-success">Simpan Harian</button>
+        </div>
 
+        <!-- STEP 2 -->
+        <div id="step-2" style="display: none;">
+            <h3>Form Evaluasi Bulanan</h3>
+
+            <div class="mb-3">
+                <label>Kendala</label>
+                <input type="text" name="kendala" class="form-control" placeholder="Kendala...">
+            </div>
+            <div class="mb-3">
+                <label>Solusi</label>
+                <input type="text" name="solusi" class="form-control" placeholder="Solusi...">
+            </div>
+            <div class="mb-3">
+                <label>Target Bulan Depan</label>
+                <input type="text" name="target" class="form-control" placeholder="Target...">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Simpan Semua</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <h3>Riwayat Catatan</h3>
+    <div class="row">
+        @foreach ($catatans as $catatan)
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5>{{ $catatan->title }}</h5>
+                    <p>{{ $catatan->created_at->format('d M Y') }}</p>
+                    <p>{{ $catatan->description }}</p>
+                    <p><strong>Kendala:</strong> {{ $catatan->kendala }}</p>
+                    <p><strong>Solusi:</strong> {{ $catatan->solusi }}</p>
+                    <p><strong>Target:</strong> {{ $catatan->target }}</p>
+
+                    @foreach ($catatan->images as $image)
+                    <img src="{{ asset($image->image_path) }}" class="img-fluid" style="max-height: 150px;">
+                    @endforeach
+                </div>
+            </div>
         </div>
         @endforeach
-
     </div>
 
-</body>
+</div>
+
+<script>
+// document.getElementById('nextToMonthly').addEventListener('click', function() {
+//     document.getElementById('step-1').style.display = 'none';
+//     document.getElementById('step-2').style.display = 'block';
+// });
+</script>
+
 @endsection

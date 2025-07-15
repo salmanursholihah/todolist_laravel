@@ -154,3 +154,42 @@ footer {
     
 
 }
+    #sidebar {
+        transition: transform 0.3s ease, width 0.3s ease;
+    }
+
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 997;
+        display: none;
+    }
+
+    /* Mobile */
+    @media (max-width: 767.98px) {
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 200px;
+            background: #f8f9fa;
+            transform: translateX(-100%);
+            z-index: 998;
+        }
+
+        #sidebar.show {
+            transform: translateX(0);
+        }
+    }
+
+    /* Desktop */
+    @media (min-width: 768px) {
+        #sidebar.hidden {
+            display: none;
+        }
+    }
