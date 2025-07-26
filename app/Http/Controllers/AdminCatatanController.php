@@ -112,38 +112,27 @@ return redirect()->route('admin.catatans.index')->with('success', 'Catatan berha
 
         return $pdf->download('laporan_catatan.pdf');
     }
-    public function exportPerBulan( request $request)
-    {
-        $month = $request->input('month');
-        $year = $request->input('year');
 
-        $catatans = Catatan::whereMonth('created_at', $month)
-                            ->whereYear('created_at', $year)
-                            ->get();
 
-   $pdf = Pdf::loadView('admin.catatans.export', compact('catatans', 'month', 'year'));
-$pdf->setPaper('A4','landscape');
+    public function exportPerBulan(Request $request)
+{
+    $month = $request->input('month');
+    $year = $request->input('year');
+
+    $catatans = Catatan::whereMonth('created_at', $month)
+                        ->whereYear('created_at', $year)
+                        ->get();
+
+    $catatans = $this->toUtf8($catatans);
+
+    $pdf = Pdf::loadView('admin.catatans.export', compact('catatans', 'month', 'year'));
+    $pdf->setPaper('A4','landscape');
+
     return $pdf->download("catatan_{$month}_{$year}.pdf");
-        
-    }
+}
 
 
-// public function exportPerUser(Request $request)
-// {
-//     $id = $request->user_id ?? auth()->id();
-//     $user = User::findOrFail($id);
 
-//     $catatans = Catatan::where('user_id', $user->id)->get();
-
-//     if ($catatans->isEmpty()) {
-//         return redirect()->route('catatans.index')
-//                          ->with('error', 'Data tidak ditemukan.');
-//     }
-
-//     $pdf = Pdf::loadView('catatans.export_user', compact('catatans', 'user'));
-
-//     return $pdf->download("catatan_{$user->name}.pdf");
-// }
 public function exportPerUser(Request $request)
 {
     $id = $request->user_id ?? auth()->id();
@@ -152,15 +141,36 @@ public function exportPerUser(Request $request)
     $catatans = Catatan::where('user_id', $user->id)->get();
 
     if ($catatans->isEmpty()) {
-        // INI BENAR, karena route() akan panggil index()
         return redirect()->route('admin.catatans.index')->with('error', 'Data tidak ditemukan.');
     }
 
+    // Konversi data ke UTF-8 untuk menghindari error encoding
+    $catatans = $this->toUtf8($catatans);
+    $user = $this->toUtf8($user);
+
     $pdf = Pdf::loadView('admin.catatans.export_user', compact('catatans', 'user'));
-$pdf->setPaper('A4','landscape');
+    $pdf->setPaper('A4', 'landscape');
 
     return $pdf->download("catatan_{$user->name}.pdf");
 }
+
+private function toUtf8($data)
+{
+    if (is_array($data)) {
+        return array_map([$this, 'toUtf8'], $data);
+    } elseif (is_object($data)) {
+        foreach ($data as $key => $value) {
+            $data->$key = $this->toUtf8($value);
+        }
+        return $data;
+    } elseif (is_string($data)) {
+        // Ubah encoding string ke UTF-8 dari encoding apa pun yang terdeteksi otomatis
+        return mb_convert_encoding($data, 'UTF-8', 'auto');
+    } else {
+        return $data;
+    }
+}
+
 
 
 }

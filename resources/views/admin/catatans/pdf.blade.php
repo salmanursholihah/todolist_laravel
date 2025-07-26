@@ -70,9 +70,10 @@
     }
 
     body {
-        font-family: Arial, sans-serif;
+        font-family: DejaVu Sans, sans-serif;
         font-size: 10pt;
         /* KECILKAN FONTSIZE */
+
     }
 
     table {

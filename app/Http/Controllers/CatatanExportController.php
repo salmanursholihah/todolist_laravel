@@ -44,16 +44,34 @@ class CatatanExportController extends Controller
         
     }
 
+    public function exportPerUser(Request $request)
+    {
+        $id = $request->user_id ?? auth()->id();
+        $user = User::findOrFail($id);
+        $catatans = Catatan::where('user_id', $user->id)->with('user')->get();
 
-public function exportPerUser(Request $request)
-{
-    $user_id = $request->user_id ?? auth()->id();
-    $user = User::findOrFail($user_id);
+        if ($catatans->isEmpty()) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan.');
+        }
 
-    $catatans = Catatan::where('user_id', $user->id)->get();
-    $pdf = Pdf::loadView('catatans.export_user', compact('catatans', 'user'));
+        // Bersihkan encoding agar UTF-8 aman
+        foreach ($catatans as $catatan) {
+            foreach (['title', 'description', 'target', 'kendala', 'solusi'] as $field) {
+                $catatan->{$field} = mb_convert_encoding($catatan->{$field} ?? '', 'UTF-8', 'UTF-8, ISO-8859-1, ASCII');
+            }
+        }
 
-    return $pdf->download("catatan_{$user->name}.pdf");
-}
+        $user->name = mb_convert_encoding($user->name, 'UTF-8', 'UTF-8, ISO-8859-1, ASCII');
 
+        $pdf = Pdf::loadView('exports.catatan_user', compact('catatans', 'user'))
+                 ->setPaper('A4', 'landscape');
+
+        $pdf->setOptions([
+            'defaultFont' => 'DejaVu Sans',
+            'isHtml5ParserEnabled' => true,
+            'defaultEncoding' => 'UTF-8',
+        ]);
+
+        return $pdf->download("catatan_{$user->name}.pdf");
+    }
 }

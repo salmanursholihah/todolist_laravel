@@ -1,53 +1,63 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="id">
 <head>
-    <title>Laporan Catatan Users {{ $user->name }}</title>
+    <meta charset="UTF-8">
+    <title>Laporan Catatan Users {{ htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8') }}</title>
     <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        border: 1px solid #000;
-        padding: 8px;
-        text-align: left;
-    }
+        body {
+            font-family: DejaVu Sans, sans-serif;
+            font-size: 12px;
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: left;
+            word-wrap: break-word;
+        }
     </style>
 </head>
-
 <body>
-    <h2>Laporan Catatan Users {{ $user->name }}</h2>
+    <h2>Laporan Catatan Users {{ htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8') }}</h2>
     <table>
         <thead>
-
             <tr>
-                <th>user ID</th>
-                <th>name</th>
-                <th>title</th>
-                <th>deskripsi</th>
-                <th>target</th>
-                <th>permasalahan</th>
-                <th>uraian penyelesaian</th>
-                <th>tanggal input</th>
+                <th>User ID</th>
+                <th>Nama</th>
+                <th>Judul</th>
+                <th>Deskripsi</th>
+                <th>Target</th>
+                <th>Kendala</th>
+                <th>Solusi</th>
+                <th>Tanggal</th>
             </tr>
+        </thead>
+        <tbody>
             @foreach($catatans as $catatan)
             <tr>
                 <td>{{ $catatan->user_id }}</td>
-                <td>{{ $catatan->user->name ?? 'username tidak ditemukan' }}</td>
-                <td>{{ $catatan->title }}</td>
-                <td>{{ $catatan->description }}</td>
-                <td>{{ $catatan->target }}</td>
-                <td>{{ $catatan->kendala }}</td>
-                <td>{{ $catatan->solusi }}</td>
-                <td>{{ $catatan->created_at}}</td>
+                <td>{{ htmlspecialchars($catatan->user->name ?? 'username tidak ditemukan', ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ htmlspecialchars($catatan->title, ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ htmlspecialchars($catatan->description, ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ htmlspecialchars($catatan->target, ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ htmlspecialchars($catatan->kendala, ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ htmlspecialchars($catatan->solusi, ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ $catatan->created_at->format('d-m-Y') }}</td>
             </tr>
             @endforeach
-
-            </tbody>
+        </tbody>
     </table>
 </body>
-
 </html>
+
+
+
+
+

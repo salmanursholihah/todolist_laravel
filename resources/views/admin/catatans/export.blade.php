@@ -15,6 +15,10 @@
         padding: 8px;
         text-align: left;
     }
+    body {
+         font-family: DejaVu Sans, sans-serif;
+    
+    }
     </style>
 </head>
 

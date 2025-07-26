@@ -22,6 +22,8 @@ use App\Http\Controllers\TasksExportController;
 use App\Http\Controllers\UsersExportController;
 use App\Http\Controllers\MonthlyReportController;
 use App\Http\Controllers\TestCatatanController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -187,3 +189,38 @@ Route::middleware(['auth', 'CheckRole:user'])->group(function(){
    Route::get('/test/catatan', [TestCatatanController::class, 'index'])->name('test.catatans.index'); 
    Route::post('/test/catatan', [TestCatatanController::class, 'store'])->name('test.catatans.store');
 });
+
+
+///chat admin routes
+Route::middleware(['auth', 'CheckRole:admin'])->group(function () {
+    Route::get('admin/chat', [MessageController::class, 'indexAdmin'])->name('admin.chat.index');
+    Route::get('admin/chat/{receiverId}', [MessageController::class, 'chatWithAdmin'])->name('admin.chat.show');
+    Route::post('admin/chat/send', [MessageController::class, 'send'])->name('admin.chat.send');
+});
+
+//chat user routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('chat', [MessageController::class, 'indexUser'])->name(name: 'chat.index');
+    Route::get('chat/{receiverId}', [MessageController::class, 'chatWithUser'])->name('chat.show');
+    Route::post('chat/send', [MessageController::class, 'send'])->name('chat.send');
+});
+
+
+//profile user
+
+Route::middleware(['auth'])->group(function(){
+    Route::get ('profile',[ProfileController::class, 'show'])->name('profile.show');
+    Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/export-catatan', [CatatanExportController::class, 'exportPerUser'])->name('catatan.export.pdf');
