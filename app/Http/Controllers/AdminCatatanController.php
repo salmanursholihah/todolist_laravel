@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Catatan;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CatatanExport;
 class AdminCatatanController extends Controller
 {
 public function index(Request $request)
@@ -169,6 +170,15 @@ private function toUtf8($data)
     } else {
         return $data;
     }
+}
+
+public function exportExcel()
+{
+    $catatans = Catatan::all();
+
+    $catatans = $this->toUtf8(($catatans));
+         
+    return Excel::download(new CatatanExport($catatans), 'catatan.xlsx');
 }
 
 

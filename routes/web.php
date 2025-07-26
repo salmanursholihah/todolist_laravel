@@ -214,7 +214,10 @@ Route::middleware(['auth'])->group(function(){
 });
 
 
+///admin export catatan pdf
 
+Route::get('/export-excel', [AdminCatatanController::class, 'exportExcel']);
+Route::get('/export-catatan', [CatatanExportController::class, 'exportPerUser'])->name('catatan.export.pdf');
 
 
 

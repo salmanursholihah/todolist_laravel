@@ -7,11 +7,33 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class CatatanExport implements FromCollection
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+
     public function collection()
     {
-        return Catatan::all();
+        return Catatan::all([
+            'id',
+            'title',
+            'description',
+            'created_at',
+            'updated_at',
+            'kendala',
+            'solusi',
+            'target',
+            'user_id',
+        ]);
+    }
+
+    public function headings(): array
+    {
+        return [
+            'ID',
+            'Judul',
+            'Deskripsi',
+            'Tanggal Input',
+            'Kendala',
+            'Solusi',
+            'Target',
+            'ID User',
+        ];
     }
 }
