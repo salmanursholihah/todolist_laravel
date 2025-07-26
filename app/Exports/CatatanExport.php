@@ -2,15 +2,15 @@
 
 namespace App\Exports;
 
-use app\Models\Catatan;
+use App\Models\Catatan;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class CatatanExport implements FromCollection
+class CatatanExport implements FromCollection, WithHeadings
 {
-
     public function collection()
     {
-        return Catatan::all([
+        return Catatan::select([
             'id',
             'title',
             'description',
@@ -20,7 +20,7 @@ class CatatanExport implements FromCollection
             'solusi',
             'target',
             'user_id',
-        ]);
+        ])->get();
     }
 
     public function headings(): array
@@ -30,6 +30,7 @@ class CatatanExport implements FromCollection
             'Judul',
             'Deskripsi',
             'Tanggal Input',
+            'Tanggal Update',
             'Kendala',
             'Solusi',
             'Target',
