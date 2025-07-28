@@ -214,12 +214,6 @@ Route::middleware(['auth'])->group(function(){
 });
 
 
-//profile admin
-
-Route::middleware(['auth','CheckRole:admin'])->group(function(){
-    Route::get ('admin/profile',[ProfileController::class, 'show'])->name('profile.show');
-    Route::put('admin/profile', [ProfileController::class, 'update'])->name('profile.update');
-});
 
 
 ///admin export catatan pdf
