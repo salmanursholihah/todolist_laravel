@@ -214,16 +214,17 @@ Route::middleware(['auth'])->group(function(){
 });
 
 
+//profile admin
+
+Route::middleware(['auth','CheckRole:admin'])->group(function(){
+    Route::get ('admin/profile',[ProfileController::class, 'show'])->name('profile.show');
+    Route::put('admin/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+
 ///admin export catatan pdf
 
 Route::get('/export-excel', [AdminCatatanController::class, 'exportExcel']);
 Route::get('/export-catatan', [CatatanExportController::class, 'exportPerUser'])->name('catatan.export.pdf');
 
 
-
-
-
-
-
-
-Route::get('/export-catatan', [CatatanExportController::class, 'exportPerUser'])->name('catatan.export.pdf');

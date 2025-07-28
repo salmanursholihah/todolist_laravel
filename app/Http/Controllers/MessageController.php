@@ -17,10 +17,6 @@ class MessageController extends Controller
     return view('admin.chat.index', compact('users'));
 }
 
-// public function indexUser() {
-//     $admins = User::where('role', 'admin')->get();
-//     return view('chat.index', compact('admins'));
-// }
 
 public function indexUser() {
     $users = User::where('role', 'admin')->get();
@@ -54,20 +50,67 @@ public function indexUser() {
         return view ('chat.show', compact('receiver', 'messages'));           
     }
 
-    public function send (Request $request)
-    {
-        $request->validate([
-            'receiver_id' => 'required|exists:users,id',
-            'content' => 'required|string|max:255',
-   ]);
-            $messages = new Message();
-            $messages->sender_id = Auth::id();
-            $messages->receiver_id = $request->receiver_id;
-            $messages->content = $request->content;
-            $messages->save();
+// public function send(Request $request)
+// {
+//     $request->validate([
+//         'receiver_id' => 'required|exists:users,id',
+//         'content' => 'nullable|string',
+//         'attachments.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//     ]);
 
-return response()->json(['success'=>true]);     
+//     $message = new Message();
+//     $message->sender_id = auth()->id();
+//     $message->receiver_id = $request->receiver_id;
+//     $message->content = $request->content;
 
+//     // Proses upload file
+//     $attachments = [];
+//     if ($request->hasFile('attachments')) {
+//         foreach ($request->file('attachments') as $file) {
+//             $filename = time() . '_' . $file->getClientOriginalName();
+//             $file->storeAs('/storage/message_attachments', $filename); // simpan di storage
+//             $attachments[] = $filename;
+//         }
+//         $message->attachment = json_encode($attachments);
+//     }
+
+//     $message->save();
+
+//     return response()->json(['success' => true]);
+// }
+
+public function send(Request $request)
+{
+    $request->validate([
+        'receiver_id' => 'required|exists:users,id',
+        'content' => 'nullable|string',
+        'attachments.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    $message = new Message();
+    $message->sender_id = auth()->id();
+    $message->receiver_id = $request->receiver_id;
+    $message->content = $request->content;
+
+    $attachments = [];
+    if ($request->hasFile('attachments')) {
+        foreach ($request->file('attachments') as $file) {
+            $filename = time() . '_' . $file->getClientOriginalName();
+            // Simpan langsung ke folder public/storage/message_attachments
+            $destinationPath = public_path('storage/message_attachments');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true); // buat folder jika belum ada
+            }
+            $file->move($destinationPath, $filename);
+            $attachments[] = $filename;
+        }
+        $message->attachment = json_encode($attachments);
     }
+
+    $message->save();
+
+    return response()->json(['success' => true]);
+}
+
 
 }

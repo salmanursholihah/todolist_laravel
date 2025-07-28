@@ -39,6 +39,7 @@
                 @endif
                 <li class="nav-item"><a class="nav-link" href="{{ url('catatan') }}">Catatan</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/chat') }}">chat</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/profile') }}">profile</a></li>
                 @endauth
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="post">

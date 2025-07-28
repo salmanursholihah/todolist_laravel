@@ -1,7 +1,7 @@
 @foreach ($users as $user)
     <div class="user">
         <a href="{{ route('chat.show', $user->id) }}">
-            <img src="{{ asset('storage/avatars/' . ($user->avatar ?? 'default.png')) }}" class="avatar">
+            <img src="{{ asset('public/avatars/' . ($user->avatar ?? 'default.png')) }}" class="avatar">
             {{ $user->name }}
         </a>
     </div>
