@@ -24,6 +24,8 @@ use App\Http\Controllers\MonthlyReportController;
 use App\Http\Controllers\TestCatatanController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LemburController;
+use App\Http\Controllers\AdminLemburController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +119,7 @@ Route::get('/catatan/export/excel', [AdminCatatanController::class, 'exportExcel
 Route::get('/catatan/export/pdf', [AdminCatatanController::class, 'exportPDF'])->name('catatan.export.pdf');
 Route::post('/export-catatan', [AdminCatatanController::class, 'exportPerBulan' ])->name('export.perbulan');
 Route::post('export-catatan-peruser', [AdminCatatanController::class, 'exportPerUser'])->name('export.peruser');
+
 
 
 
@@ -222,3 +225,23 @@ Route::get('/export-excel', [AdminCatatanController::class, 'exportExcel']);
 Route::get('/export-catatan', [CatatanExportController::class, 'exportPerUser'])->name('catatan.export.pdf');
 
 
+
+//lembur
+Route::middleware(['auth'])->group(function () {
+    Route::get('/lembur', [LemburController::class, 'index'])->name('lembur.index');
+    Route::get('/lembur/create', [LemburController::class, 'create'])->name('lembur.create');
+    Route::post('/lembur', [LemburController::class, 'store'])->name('lembur.store');
+    Route::put('/lembur/{id}/status', [LemburController::class, 'updateStatus'])->name('lembur.updateStatus');
+});
+
+
+//admin lembur
+Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/lembur', [AdminLemburController::class, 'index'])->name('lembur.index');
+    Route::post('/lembur/{id}/approve', [AdminLemburController::class, 'approve'])->name('lembur.approve');
+    Route::post('/lembur/{id}/reject', [AdminLemburController::class, 'reject'])->name('lembur.reject');
+});
+
+///download laporan lembur
+Route::post('/export-lembur', [AdminLemburController::class, 'exportPerBulan' ])->name('export.perbulan');
+Route::post('export-lembur-peruser', [AdminLemburController::class, 'exportPerUser'])->name('admin.lembur.export_puser');

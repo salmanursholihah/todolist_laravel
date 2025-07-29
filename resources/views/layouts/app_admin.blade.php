@@ -46,6 +46,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url('/admin/tasks/index') }}">Todolist User</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/admin/users/index') }}">User Manager</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/admin/admin_list/index') }}">Admin List</a>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/admin/lembur') }}">Laporan user lembur</a>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/admin/chat') }}">chat</a>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/admin/profile') }}">profile</a>
 
