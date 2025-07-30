@@ -240,8 +240,13 @@ Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')-
     Route::get('/lembur', [AdminLemburController::class, 'index'])->name('lembur.index');
     Route::post('/lembur/{id}/approve', [AdminLemburController::class, 'approve'])->name('lembur.approve');
     Route::post('/lembur/{id}/reject', [AdminLemburController::class, 'reject'])->name('lembur.reject');
+    Route::get('lembur/bonus', [AdminLemburController::class, 'showBonus'])->name('lembur.bonus');
+    Route::put('setting/lembur', [AdminLemburController::class, 'updateLembur'])->name('setting.lembur.update');
+
 });
 
 ///download laporan lembur
 Route::post('/export-lembur', [AdminLemburController::class, 'exportPerBulan' ])->name('export.perbulan');
 Route::post('export-lembur-peruser', [AdminLemburController::class, 'exportPerUser'])->name('admin.lembur.export_puser');
+
+

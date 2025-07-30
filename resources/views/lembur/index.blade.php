@@ -1,7 +1,7 @@
 
 @extends ('layouts.app')
 
-@section ('title', 'task')
+@section ('title', 'user.lembur')
 @section ('content')
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +31,6 @@
                 <th>Alasan</th>
                 <th>Bukti</th>
                 <th>Status</th>
-                <th>Catatan</th>
             </tr>
         </thead>
         <tbody>
@@ -42,7 +41,7 @@
                     <td>{{ $l->alasan }}</td>
                     <td>
                         @if ($l->bukti)
-                            <a href="{{ asset('storage/bukti/' . $l->bukti) }}" target="_blank">Lihat</a>
+                        <a href="{{ asset('bukti_lembur/' . $l->bukti) }}" target="_blank">Lihat</a>                        
                         @else
                             Tidak Ada
                         @endif
@@ -54,9 +53,10 @@
                             <span class="badge bg-success">Approved</span>
                         @else
                             <span class="badge bg-danger">Rejected</span>
+                            <small><strong>Catatan:</strong>{{ $l->catatan }}</small>
                         @endif
                     </td>
-                    <td>{{ $l->catatan ?? '-' }}</td>
+                   
                 </tr>
             @endforeach
         </tbody>
@@ -66,3 +66,7 @@
 </body>
 </html>
 @endsection
+
+
+
+

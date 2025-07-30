@@ -9,17 +9,31 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\LemburExport; 
+use App\Models\Setting;
+use Carbon\Carbon;
 
 class AdminLemburController extends Controller
 {
 
-    public function index()
-    {
-        $lemburs = Lembur::with('user')->latest()->get();
-        $users = User::all();
 
-        return view('admin.lembur.index', compact('lemburs','users'));
-    }
+    public function index()
+{
+    $rate = Setting::where('key', 'lembur_per_jam')->value('value') ?? 0;
+
+    $lemburs = Lembur::with('user')->latest()->get()->map(function ($item) use ($rate) {
+        $start = Carbon::parse($item->jam_mulai);
+        $end = Carbon::parse($item->jam_selesai);
+        $durasi = $start->diffInMinutes($end) / 60;
+
+        $item->durasi_jam = round($durasi, 2);
+        $item->bonus = round($durasi * $rate, 2);
+        return $item;
+    });
+
+    $users = User::all();
+
+    return view('admin.lembur.index', compact('lemburs', 'users'));
+}
 
     public function approve($id)
     {
@@ -39,10 +53,77 @@ class AdminLemburController extends Controller
         $lemburs->update([
             'status' => 'rejected',
             'catatan' => $request->catatan,
+            $lemburs->save(),
         ]);
 
         return back()->with('success', 'Lembur Rejected.');
     }
+
+
+public function store(Request $request)
+{
+    $request->validate([
+        'tanggal' => 'required|date',
+        'jam_mulai' => 'required',
+        'jam_selesai' => 'required|after:jam_mulai',
+        'alasan' => 'required|string',
+    ]);
+
+    $mulai = Carbon::createFromFormat('H:i', $request->jam_mulai);
+    $selesai = Carbon::createFromFormat('H:i', $request->jam_selesai);
+
+    $durasiJam = $selesai->diffInMinutes($mulai) / 60;
+
+    // Ambil tarif dari setting
+    $rate = Setting::where('key', 'lembur_per_jam')->first()->value ?? 0;
+    $bonus = $durasiJam * $rate;
+
+    Lembur::create([
+        'user_id' => auth()->id(),
+        'tanggal' => $request->tanggal,
+        'jam_mulai' => $request->jam_mulai,
+        'jam_selesai' => $request->jam_selesai,
+        'alasan' => $request->alasan,
+        'status' => 'pending',
+        'bonus' => (int) $bonus,
+    ]);
+
+    return redirect()->route('user.lembur.index')->with('success', 'Lembur berhasil diajukan');
+}
+
+public function updateLembur(Request $request)
+{
+    $request->validate([
+        'rate' => 'required|numeric|min:0',
+    ]);
+
+    Setting::updateOrCreate(
+        ['key' => 'lembur_per_jam'],
+        ['value' => $request->rate]
+    );
+
+    return back()->with('success', 'Nominal lembur per jam berhasil diperbarui.');
+}
+
+public function showBonus()
+{
+    $rate = Setting::where('key', 'lembur_per_jam')->value('value') ?? 0;
+
+    $lemburs = Lembur::with('user')->get()->map(function ($item) use ($rate) {
+        $jamMulai = \Carbon\Carbon::parse($item->jam_mulai);
+        $jamSelesai = \Carbon\Carbon::parse($item->jam_selesai);
+        $durasi = $jamMulai->diffInMinutes($jamSelesai) / 60; // jam lembur
+
+        $item->durasi_jam = round($durasi, 2);
+        $item->bonus = round($durasi * $rate, 2);
+        return $item;
+    });
+
+    return view('admin.lembur.bonus', compact('lemburs', 'rate'));
+}
+
+
+
 
 
 

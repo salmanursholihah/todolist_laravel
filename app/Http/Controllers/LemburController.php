@@ -23,21 +23,55 @@ public function index()
     return view('lembur.index', compact('lemburs'));
 }
 
+// public function store(Request $request)
+// {
+//     $request->validate([
+//         'tanggal' => 'required|date',
+//         'jam_mulai' => 'required',
+//         'jam_selesai' => 'required|after:jam_mulai',
+//         'alasan' => 'required|string',
+//         'bukti' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+//     ]);
+
+//     $filename = null;
+
+
+// if ($request->hasFile('bukti')) {
+//     $bukti = $request->file('bukti');
+//     $filename = time() . '_' . $bukti->getClientOriginalName();
+//     $bukti->move(public_path('bukti_lembur'), $filename);
+// }
+
+// Lembur::create([
+//     'user_id' => auth()->id(),
+//     'tanggal' => $request->tanggal,
+//     'jam_mulai' => $request->jam_mulai,
+//     'jam_selesai' => $request->jam_selesai,
+//     'alasan' => $request->alasan,
+//     'bukti' => $filename // aman walau null
+// ]);
+
+
+//     return redirect()->route('lembur.index')->with('success', 'Lembur berhasil diajukan.');
+// }
+
+
 public function store(Request $request)
 {
     $request->validate([
         'tanggal' => 'required|date',
         'jam_mulai' => 'required',
-        'jam_selesai' => 'required|after:mulai',
+        'jam_selesai' => 'required',
         'alasan' => 'required|string',
-        'bukti' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048'
+        'bukti' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
-    $fileName = null;
+    $filename = null;
+
     if ($request->hasFile('bukti')) {
-        $file = $request->file('bukti');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $file->storeAs('public/bukti', $fileName);
+        $bukti = $request->file('bukti');
+        $filename = time() . '_' . $bukti->getClientOriginalName();
+        $bukti->move(public_path('bukti_lembur'), $filename);
     }
 
     Lembur::create([
@@ -46,7 +80,7 @@ public function store(Request $request)
         'jam_mulai' => $request->jam_mulai,
         'jam_selesai' => $request->jam_selesai,
         'alasan' => $request->alasan,
-        'bukti' => $fileName
+        'bukti' => $filename, // akan null jika tidak ada upload
     ]);
 
     return redirect()->route('lembur.index')->with('success', 'Lembur berhasil diajukan.');

@@ -1,6 +1,6 @@
 @extends('layouts.app_admin')
 
-@section('title', 'dashboard_admin')
+@section('title', 'admin index lembur')
 
 @section('content')
 <!DOCTYPE html>
@@ -56,6 +56,8 @@
             <th>Waktu</th>
             <th>Alasan</th>
             <th>Bukti</th>
+            <th>Durasi</th>
+            <th>Bonus</th>
             <th>Status</th>
             <th>Aksi</th>
         </tr>
@@ -69,12 +71,17 @@
                 <td>{{ $lembur->alasan }}</td>
                 <td>
                     @if ($lembur->bukti)
-                        <a href="{{ asset('storage/' . $lembur->bukti) }}" target="_blank">Lihat Bukti</a>
+                        <a href="{{ asset('bukti_lembur/' . $lembur->bukti) }}" target="_blank">Lihat</a>                        
                     @else
                         Tidak Ada
                     @endif
                 </td>
-                <td>
+                <td>{{ \Carbon\Carbon::parse($lembur->jam_mulai)->diffInMinutes(\Carbon\Carbon::parse($lembur->jam_selesai)) / 60 }} jam</td>
+                @php
+                    $totalBonus = $lembur->sum('bonus');
+                @endphp
+                <td>Rp {{ number_format($lembur->bonus, 0, ',', '.') }}</td>             
+                   <td>
                     @if ($lembur->status == 'pending')
                         <span class="badge bg-warning">Pending</span>
                     @elseif ($lembur->status == 'approved')
@@ -92,7 +99,33 @@
                         <form action="{{ route('admin.lembur.reject', $lembur->id) }}" method="POST" style="display:inline-block;">
                             @csrf
                             <input type="hidden" name="catatan" value=" Rejected by admin">
-                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#rejectModal{{ $lembur->id }}">
+                            Reject
+                            </button>
+                            <!-- Modal -->
+<div class="modal fade" id="rejectModal{{ $lembur->id }}" tabindex="-1" aria-labelledby="rejectModalLabel{{ $lembur->id }}" aria-hidden="true">
+  <div class="modal-dialog">
+    <form action="{{ route('admin.lembur.reject', $lembur->id) }}" method="POST">
+        @csrf
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rejectModalLabel{{ $lembur->id }}">Alasan Penolakan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="catatan" class="form-label">Alasan</label>
+                    <textarea name="catatan" class="form-control" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger">Tolak Pengajuan</button>
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
+
                         </form>
                     @else
                         -
