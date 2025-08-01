@@ -49,7 +49,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url('/admin/lembur') }}">Laporan user lembur</a>
                 <li class="nav-item"><a class="nav-link" href="{{ url('admin/lembur/bonus') }}">update bonus</a>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/admin/chat') }}">chat</a>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/admin/profile') }}">profile</a>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/profile') }}">profile</a>
 
                 </li>
                 <li class="nav-item">

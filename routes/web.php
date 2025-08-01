@@ -26,6 +26,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\AdminLemburController;
+use App\Http\Controllers\VoiceNoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -206,15 +207,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('chat', [MessageController::class, 'indexUser'])->name(name: 'chat.index');
     Route::get('chat/{receiverId}', [MessageController::class, 'chatWithUser'])->name('chat.show');
     Route::post('chat/send', [MessageController::class, 'send'])->name('chat.send');
+    Route::get('chat/voice', [MessageController::class, 'storevoice'])->name('chat.voice');
+
 });
 
-
-//profile user
 
 Route::middleware(['auth'])->group(function(){
-    Route::get ('profile',[ProfileController::class, 'show'])->name('profile.show');
+    Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 });
+
+Route::prefix('admin')->middleware(['auth', 'CheckRole:admin'])->group(function(){
+    Route::get('profile', [ProfileController::class, 'showadmin'])->name('admin.profile.show');
+    Route::put('profile', [ProfileController::class, 'updateadmin'])->name('admin.profile.update');
+});
+
 
 
 
@@ -250,3 +257,6 @@ Route::post('/export-lembur', [AdminLemburController::class, 'exportPerBulan' ])
 Route::post('export-lembur-peruser', [AdminLemburController::class, 'exportPerUser'])->name('admin.lembur.export_puser');
 
 
+///
+
+Route::post('/voice-note/upload', [VoiceNoteController::class, 'upload']);

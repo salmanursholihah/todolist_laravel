@@ -15,6 +15,7 @@ class Message extends Model
         'receiver_id',
         'content',
         'attachment',
+        'voice_note',
       
     ];
 
@@ -25,6 +26,11 @@ class Message extends Model
 
     public function receiver()
     {
+        
         return $this->belongsTo(User::class, 'receiver_id');
     }
+
+    protected $casts = [
+            'attachment' =>'array',
+    ];
 }
