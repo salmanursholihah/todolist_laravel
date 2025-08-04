@@ -79,7 +79,7 @@
     <div class="row text-center g-3">
         <div class="col-6 col-md-2">
             <div class="menu-card">
-                <i class="fa-duotone fa-mug-hot fa-2x text-secondary mb-2"></i>
+                <i class="fa-solid fa-mug-hot fa-2x text-secondary mb-2"></i>
                 <span>Istirahat</span>
                 <a href="{{ url('/istirahat') }}" class="stretched-link"></a>
             </div>
