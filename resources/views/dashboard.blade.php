@@ -23,6 +23,7 @@
         border-radius: 10px;
         cursor: pointer;
         transition: all 0.3s ease;
+        position: relative; /* penting untuk stretched-link */
     }
 
     .menu-card:hover {
@@ -71,33 +72,36 @@
             <h6 class="fw-bold mb-0">{{ auth()->user()->name ?? 'Guest User' }}</h6>
             <small class="text-muted">{{ auth()->user()->email ?? 'Public Visitor' }}</small>
         </div>
-        <button class="btn btn-sm btn-outline-secondary" >Lihat Profil</button>
+        <a href="{{ route('profile.show') }}" class="btn btn-sm btn-outline-secondary">Lihat Profil</a>
     </div>
 
     <!-- Menu Utama -->
     <div class="row text-center g-3">
         <div class="col-6 col-md-2">
             <div class="menu-card">
-            <i class="fa-duotone fa-solid fa-mug-hot fa-2x text-secondary mb-2"></i>
-                <span>istirahat</span>
+                <i class="fa-duotone fa-mug-hot fa-2x text-secondary mb-2"></i>
+                <span>Istirahat</span>
+                <a href="{{ url('/istirahat') }}" class="stretched-link"></a>
             </div>
         </div>
         <div class="col-6 col-md-2">
             <div class="menu-card">
                 <i class="fa-solid fa-couch fa-2x text-primary mb-2"></i>
-                <span>cuti</span>
+                <span>Cuti</span>
+                <a href="{{ url('/cuti') }}" class="stretched-link"></a>
             </div>
         </div>
         <div class="col-6 col-md-2">
             <div class="menu-card">
                 <i class="fa-solid fa-calendar-days fa-2x text-danger mb-2"></i>
-                <span>izin</span>
+                <span>Izin</span>
+                <a href="{{ url('/izin') }}" class="stretched-link"></a>
             </div>
         </div>
         <div class="col-6 col-md-2">
             <div class="menu-card">
                 <i class="fa-solid fa-clock fa-2x text-secondary mb-2"></i>
-                <span>lembur</span>
+                <span>Lembur</span>
                 <a href="{{ url('/lembur') }}" class="stretched-link"></a>
             </div>
         </div>
@@ -107,17 +111,17 @@
                 <span>Catatan</span>
                 <a href="{{ url('/catatan') }}" class="stretched-link"></a>
             </div>
-
         </div>
         <div class="col-6 col-md-2">
             <div class="menu-card">
                 <i class="fa-solid fa-bell fa-2x text-success mb-2"></i>
                 <span>Notifikasi</span>
+                <a href="{{ url('/notifikasi') }}" class="stretched-link"></a>
             </div>
         </div>
     </div>
 
     <!-- Tombol Utama -->
-    <a href="{{ url('/absensi') }}" class="btn-primary-action d-block text-center">Presensi </a>
+    <a href="{{ url('/absensi') }}" class="btn-primary-action d-block text-center">Presensi</a>
 </div>
 @endsection
