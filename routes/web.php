@@ -27,6 +27,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LemburController;
 use App\Http\Controllers\AdminLemburController;
 use App\Http\Controllers\VoiceNoteController;
+use App\Http\Controllers\AbsensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -257,6 +258,19 @@ Route::post('/export-lembur', [AdminLemburController::class, 'exportPerBulan' ])
 Route::post('export-lembur-peruser', [AdminLemburController::class, 'exportPerUser'])->name('admin.lembur.export_puser');
 
 
-///
-
+///voice note
 Route::post('/voice-note/upload', [VoiceNoteController::class, 'upload']);
+
+
+///absensi kamera
+Route::middleware(['auth'])->group(function(){
+    Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+    Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
+});
+
+
+
+///halaman lembur interaktif
+// Route::get('/lembur-interaktif', function () {
+//     return view('lembur');
+// })->middleware('auth')->name('lembur');  

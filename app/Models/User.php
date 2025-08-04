@@ -60,4 +60,8 @@ public function Keuangans()
 {
     return $this->hasMany(related: keuangan::class);
 }
+public function Absensi()
+{
+    return $this->hasMany(Absensi::class);
+}
 }

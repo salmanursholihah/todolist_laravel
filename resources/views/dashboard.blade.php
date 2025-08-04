@@ -4,118 +4,120 @@
 
 @push('styles')
 <style>
-    .card-hover:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
+    .header-card {
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
 
-    .card-hover {
-        transition: all 0.3s ease;
-    }
-
-    .welcome-card {
-        background: linear-gradient(135deg, #42a5f5, #1e88e5);
-        color: white;
-        border-radius: 15px;
-    }
-
-    .icon-circle {
-        width: 60px;
-        height: 60px;
-        background-color: #e3f2fd;
+    .menu-card {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        border-radius: 50%;
-        margin-right: 15px;
+        padding: 1rem;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .menu-card:hover {
+        background: #f0f9ff;
+        transform: translateY(-4px);
+    }
+
+    .btn-primary-action {
+        background-color: #00c851;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1rem;
+        border-radius: 25px;
+        padding: 12px 0;
+        text-align: center;
+        margin-top: 1rem;
     }
 </style>
 @endpush
 
 @section('content')
 <div class="container">
-    <!-- Welcome Card -->
 
-    <!-- Dashboard Cards -->
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card card-hover shadow-sm">
-                <div class="card-body d-flex align-items-center">
-                    <div class="icon-circle">
-                        <i class="fa-solid fa-list-check fa-xl text-primary"></i>
-                    </div>
-                    <div>
-                        <h5 class="card-title mb-1">Tugas</h5>
-                        <p class="card-text text-muted">Kelola to-do list harianmu.</p>
-                        <a href="{{ url('/tasks') }}" class="stretched-link"></a>
-                    </div>
-                </div>
+    <!-- Header Info -->
+    <div class="header-card d-flex align-items-center">
+        <img src="{{ asset('storage/logo/logo_company.jpeg') }}" alt="Logo" class="me-3" width="50">
+        <div>
+            <h5 class="fw-bold mb-0">uctadiv - PT Utama Cipta Tata Asri</h5>
+            <small class="text-muted">Catat perjalananmu dengan aplikasi uctadiv</small>
+        </div>
+    </div>
+
+    <!-- Jadwal Hari Ini -->
+    <div class="header-card d-flex justify-content-between">
+        <span class="fw-bold">Jadwal Anda Hari Ini</span>
+        <div>
+            <span class="fw-bold">08:00</span>
+            <span class="mx-2">-</span>
+            <span class="fw-bold">17:00</span>
+        </div>
+    </div>
+
+    <!-- Profil Public -->
+    <div class="header-card d-flex justify-content-between align-items-center">
+        <div>
+            <h6 class="fw-bold mb-0">{{ auth()->user()->name ?? 'Guest User' }}</h6>
+            <small class="text-muted">{{ auth()->user()->email ?? 'Public Visitor' }}</small>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary" >Lihat Profil</button>
+    </div>
+
+    <!-- Menu Utama -->
+    <div class="row text-center g-3">
+        <div class="col-6 col-md-2">
+            <div class="menu-card">
+            <i class="fa-duotone fa-solid fa-mug-hot fa-2x text-secondary mb-2"></i>
+                <span>istirahat</span>
             </div>
         </div>
-        @if(auth()->user()->email === 'dwidoraptucta@gmail.com')
-
-        <div class="col-md-4">
-            <div class="card card-hover shadow-sm">
-                <div class="card-body d-flex align-items-center">
-                    <div class="icon-circle">
-                        <i class="fa-solid fa-wallet fa-xl text-success"></i>
-                    </div>
-
-                    <div>
-                        <h5 class="card-title mb-1">Keuangan</h5>
-                        <p class="card-text text-muted">Catat pengeluaran dan pemasukan.</p>
-                        <a href="{{ url('/keuangan') }}" class="stretched-link"></a>
-                    </div>
-
-                </div>
+        <div class="col-6 col-md-2">
+            <div class="menu-card">
+                <i class="fa-solid fa-couch fa-2x text-primary mb-2"></i>
+                <span>cuti</span>
             </div>
         </div>
-        @endif
-        <div class="col-md-4">
-            <div class="card card-hover shadow-sm">
-                <div class="card-body d-flex align-items-center">
-                    <div class="icon-circle">
-                        <i class="fa-solid fa-calendar-days fa-xl text-danger"></i>
-                    </div>
-                    <div>
-                        <h5 class="card-title mb-1">Kalender</h5>
-                        <p class="card-text text-muted">Lihat kegiatanmu dalam tampilan kalender.</p>
-                        <a href="{{ url('/calendar') }}" class="stretched-link"></a>
-                    </div>
-                </div>
+        <div class="col-6 col-md-2">
+            <div class="menu-card">
+                <i class="fa-solid fa-calendar-days fa-2x text-danger mb-2"></i>
+                <span>izin</span>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="card card-hover shadow-sm">
-                <div class="card-body d-flex align-items-center">
-                    <div class="icon-circle">
-                        <i class="fa-solid fa-book fa-xl text-warning"></i>
-                    </div>
-                    <div>
-                        <h5 class="card-title mb-1">Catatan</h5>
-                        <p class="card-text text-muted">Tulis ide atau hal penting lainnya.</p>
-                        <a href="{{ url('/catatan') }}" class="stretched-link"></a>
-                    </div>
-                </div>
+        <div class="col-6 col-md-2">
+            <div class="menu-card">
+                <i class="fa-solid fa-clock fa-2x text-secondary mb-2"></i>
+                <span>lembur</span>
+                <a href="{{ url('/lembur') }}" class="stretched-link"></a>
             </div>
         </div>
+        <div class="col-6 col-md-2">
+            <div class="menu-card">
+                <i class="fa-solid fa-book fa-2x text-warning mb-2"></i>
+                <span>Catatan</span>
+                <a href="{{ url('/catatan') }}" class="stretched-link"></a>
+            </div>
 
-        <div class="col-md-4">
-            <div class="card card-hover shadow-sm">
-                <div class="card-body d-flex align-items-center">
-                    <div class="icon-circle">
-                        <i class="fa-solid fa-gear fa-xl text-secondary"></i>
-                    </div>
-                    <div>
-                        <h5 class="card-title mb-1">Pengaturan</h5>
-                        <p class="card-text text-muted">Kelola preferensi dan akun Anda.</p>
-                        <a href="{{ url('/setting') }}" class="stretched-link"></a>
-                    </div>
-                </div>
+        </div>
+        <div class="col-6 col-md-2">
+            <div class="menu-card">
+                <i class="fa-solid fa-bell fa-2x text-success mb-2"></i>
+                <span>Notifikasi</span>
             </div>
         </div>
     </div>
+
+    <!-- Tombol Utama -->
+    <a href="{{ url('/absensi') }}" class="btn-primary-action d-block text-center">Presensi </a>
 </div>
 @endsection
