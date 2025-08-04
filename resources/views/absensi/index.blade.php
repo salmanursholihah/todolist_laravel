@@ -16,7 +16,7 @@
         <label class="block mb-2">Ambil Foto (Kamera):</label>
         <input type="file" name="image" accept="image/*" capture="environment" required class="mb-4">
 
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+        <button type="submit" class="bg-blue-600 text-black px-4 py-2 rounded">
             {{ $absen && !$absen->waktu_pulang ? 'Absen Pulang' : 'Absen Masuk' }}
         </button>
     </form>
