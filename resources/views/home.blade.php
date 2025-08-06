@@ -54,13 +54,7 @@
                     <p>Sistem akan mengirimkan notifikasi otomatis agar karyawan tidak lupa presensi.</p>          
             </div>
         </div>
-            <div class="col-md-2 d-flex">
-                <div class="card p-3 w-100 h-100">
-                    <h5>umum</h5>
-<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati, voluptate.
-</p>        
-    </div>
-        </div>
+     
     </div>
 </section>
 

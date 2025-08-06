@@ -42,7 +42,8 @@
   <div class="footer-top">
     <div class="footer-logo">
       <img src="logo-uct.png" alt="uct Logo" class="logo">
-      <p>Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02, Magelang, Kec. Magelang Utara, Kota Magelang, Jawa Tengah</p>
+      <p>Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02, 
+        <br>Magelang, Kec. Magelang Utara, Kota Magelang, Jawa Tengah</p>
       <p><i class="whatsapp-icon">📱</i>08123467858</p>
       <p><i class="email-icon">📧</i> halo@uct.com</p>
       <div class="social-icons">
