@@ -38,54 +38,68 @@
     </main>
 
 
-<footer class="bg-dark text-white pt-5 pb-4">
+<footer class="bg-dark text-white pt-5 pb-4 mt-5">
   <div class="container">
     <div class="row">
 
-      <!-- Tentang Kami -->
-      <div class="col-md-3 col-12 mb-4">
+      <!-- Logo dan alamat -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <img src="logo-uct.png" alt="UCTADIV Logo" style="width:150px;">
+        <p class="mt-3">
+          Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02,<br> Magelang, Jawa Tengah
+        </p>
+        <p>📱 0812 3467 858</p>
+        <p>📧 halo@uct.com</p>
+        <div class="d-flex gap-2">
+          <a href="#"><img src="{{ asset('storage/logo/logo-facebook.jpg') }}" width="24"></a>
+          <a href="#"><img src="{{ asset('storage/logo/logo-twitter.jpg') }}" width="24"></a>
+          <a href="https://www.tiktok.com/@ospod67?_t=ZS-8ycKl7yOd2G&_r=1"><img src="{{ asset('storage/logo/logo-tiktok.jpg') }}" width="24"></a>
+          <a href="https://www.instagram.com/pt_utama_ciptatataasri?igsh=MTc1a3Vnem9qN2NvbQ=="><img src="{{ asset('storage/logo/logo-instagram.jpg') }}" width="24"></a>
+          <a href="https://youtube.com/@ospod-milos?si=pJO2FPcFW9RLsaY9"><img src="{{ asset('storage/logo/logo-youtube.jpg') }}" width="24"></a>
+          <a href="#"><img src="{{ asset('storage/logo/logo-linkedin.jpg') }}" width="24"></a>
+        </div>
+      </div>
+
+      <!-- Menu links 1 -->
+      <div class="col-lg-3 col-md-6 mb-4">
         <h5>Tentang Kami</h5>
-        <p>UCTAdiv adalah platform absensi online pintar yang membantu perusahaan mencatat kehadiran karyawan secara efisien dan akurat.</p>
-      </div>
-
-      <!-- Menu Navigasi -->
-      <div class="col-md-3 col-12 mb-4">
-        <h5>Menu</h5>
         <ul class="list-unstyled">
-          <li><a href="#home" class="text-white">Beranda</a></li>
-          <li><a href="#fitur" class="text-white">Fitur</a></li>
-          <li><a href="#blog" class="text-white">Blog</a></li>
-          <li><a href="#contact" class="text-white">Kontak</a></li>
+          <li><a href="#" class="text-white">Tentang</a></li>
+          <li><a href="#" class="text-white">Blog</a></li>
+          <li><a href="#" class="text-white">FAQ</a></li>
+          <li><a href="#" class="text-white">Jadwalkan Demo</a></li>
+          <li><a href="#" class="text-white">Karir</a></li>
+          <li><a href="#" class="text-white">Login</a></li>
         </ul>
       </div>
 
-      <!-- Kontak -->
-      <div class="col-md-3 col-12 mb-4">
-        <h5>Kontak</h5>
+      <!-- Menu links 2 -->
+      <div class="col-lg-3 col-md-6 mb-4">
+        <h5>Layanan</h5>
         <ul class="list-unstyled">
-          <li>Email: info@uctadiv.com</li>
-          <li>Telp: 0812-3456-7890</li>
-          <li>Alamat: Jl. Contoh No. 123</li>
+          <li><a href="#" class="text-white">Cara Registrasi</a></li>
+          <li><a href="#" class="text-white">Panduan Aplikasi</a></li>
+          <li><a href="#" class="text-white">Syarat & Ketentuan</a></li>
+          <li><a href="#" class="text-white">Kebijakan Privasi</a></li>
+          <li><a href="#" class="text-white">Pengembalian Dana</a></li>
+          <li><a href="#" class="text-white">Keamanan Layanan</a></li>
         </ul>
       </div>
 
-      <!-- Google Maps -->
-      <div class="col-md-3 col-12 mb-4">
+      <!-- Google maps -->
+      <div class="col-lg-3 col-md-6 mb-4">
         <h5>Lokasi</h5>
         <div class="ratio ratio-4x3">
           <iframe
-            src="https://maps.google.com/maps?q=Jakarta&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            allowfullscreen
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.606862730542!2d110.21981317500169!3d-7.465586392545967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a8f06c1ce38eb%3A0xb67783d2e0568c26!2sPJKA%204%20(BKW)!5e1!3m2!1sid!2sid!4v1754383919161!5m2!1sid!2sid"
+            style="border:0;" allowfullscreen loading="lazy"></iframe>
         </div>
       </div>
     </div>
 
     <hr class="border-secondary" />
-    <div class="text-center mt-3">
-      &copy; 2025 UCTAdiv. All rights reserved.
+    <div class="text-center mt-3" style="font-weight: bold;">
+      &copy; 2025 uctadiv - Hak cipta dilindungi.
     </div>
   </div>
 </footer>
