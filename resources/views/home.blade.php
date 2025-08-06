@@ -8,11 +8,11 @@
         <div class="row align-items-center">
             <div class="col-md-6 text-md-start">
                 <h1>Solusi cerdas  <br><span class="text-primary">Untuk mengelola tugas harian anda</span></h1>
-                <p class="lead">Uctadiv membantu HRD dan pemilik usaha mempermudah absensi, cuti, dan rekap gaji dalam satu aplikasi</p>
+                <p class="lead">Absen Pintar membantu HRD dan pemilik usaha mempermudah absensi, cuti, dan rekap gaji dalam satu aplikasi</p>
                 <a href="#kontak" class="btn btn-primary">Jadwalkan Demo Sekarang</a>
             </div>
             <div class="col-md-6">
-                <img src="{{ asset('storage/logo/hero.jpg') }}" class="img-fluid" alt="Hero Uctadiv">
+                <img src="{{ asset('storage/logo/hero.jpg') }}" class="img-fluid" alt="Hero AbsenPintar">
             </div>
         </div>
     </div>
@@ -62,9 +62,9 @@
 <section style="padding-top: 20px; padding-bottom: 20px ; background-color: #d3daddff; color:black;" id="biaya">
     <div class="container text-center">
         <h2>tentang kami</h2>
-        <p>selamat datang di blog resmi Uctadiv.my.id
+        <p>selamat datang di blog resmi Absen Pintar
 <br><br>
-Uctadiv merupakan platform absensi online yang dirancang untuk membantu dan mempermudah dalam pengelolaan absesi secara mudah dan efisien. 
+Absen Pintar merupakan platform absensi online yang dirancang untuk membantu dan mempermudah dalam pengelolaan absesi secara mudah dan efisien. 
 <br>
  melalui blog ini kami berbagi informasi, panduan, 
  <br>
@@ -87,7 +87,7 @@ terima kasih sudah berkunjung ke portal kami,
 
 <section class="py-5" id="panduan">
     <div class="container">
-        <h2 class="text-center mb-4">Mengapa Memilih Uctadiv?</h2>
+        <h2 class="text-center mb-4">Mengapa Memilih Absen Pintar?</h2>
         <div class="row text-center">
             <div class="col-md-4 mb-3">
                 <h5>Praktis dan otomatis</h5>
@@ -96,7 +96,7 @@ terima kasih sudah berkunjung ke portal kami,
             <div class="col-md-4 mb-3">
                 <h5>skalable</h5>
                 <p>cocok untuk bisnis kecil hingga Perusahaan besar</p>
-                        <img src="https://trenmasakini.com/wp-content/uploads/2024/10/Scalable-Adalah-6.jpg" alt="gambar ilustrasi" class="img-fluid mt-4 text-center">
+                        <img src="{{ asset('storage/logo/image.png')  }}" alt="gambar ilustrasi" class="img-fluid mt-4 text-center">
             </div>
             <div class="col-md-4 mb-3">
                 <h5>Real time</h5>

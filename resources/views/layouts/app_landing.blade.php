@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uctadiv - Demo Landing</title>
+    <title>Absenpintar - Demo Landing</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/style/style_index.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-4">
         <div class="container">
-            <a class="navbar-brand" style="font-weight:bold; font-family:arial">Uctadiv ~ Mytodo</a>
+            <a class="navbar-brand" style="font-weight:bold; font-family:arial">Absen Pintar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -19,9 +22,9 @@
             <div class="collapse navbar-collapse font-weight-bold" id="navbarNav">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">beranda</a></li>
-                    <li class="nav-item"><a href="#fitur" class="nav-link">Fitur</a></li>
-                    <li class="nav-item"><a href="#fitur" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="#panduan" class="nav-link">Panduan</a></li>
+                    <li class="nav-item"><a href="{{ url('/langganan') }}" class="nav-link">Fitur</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="{{ url('/panduan') }}" class="nav-link">Panduan</a></li>
                     <li class="nav-item"><a href="/kontak" class="nav-link">Kontak</a></li>
                     <li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link">Absensi</a></li>
                     <li class="nav-item"><a href="{{  url('/register')}}" class="nav-link">Daftar</a></li>
@@ -44,7 +47,7 @@
 
       <!-- Logo dan alamat -->
       <div class="col-lg-3 col-md-6 mb-4">
-        <img src="logo-uct.png" alt="UCTADIV Logo" style="width:150px;">
+        <img src="logo-uct.png" alt="Absen pintar Logo" style="width:150px;">
         <p class="mt-3">
           Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02,<br> Magelang, Jawa Tengah
         </p>
@@ -99,7 +102,7 @@
 
     <hr class="border-secondary" />
     <div class="text-center mt-3" style="font-weight: bold;">
-      &copy; 2025 uctadiv - Hak cipta dilindungi.
+      &copy; 2025 Absen Pintar - Hak cipta dilindungi.
     </div>
   </div>
 </footer>
@@ -108,3 +111,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+   
