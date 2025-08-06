@@ -17,8 +17,16 @@
             <h1>Selamat datang di mytodo.my.id</h1>
             <p>Solusi cerdas untuk mengelola tugas harian anda.</p>
             <a href="#" class="cta-button">Pelajari Lebih Lanjut</a>
-        </div>
+        </div
     </header>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="">Beranda</a></li>
+            <li><a href="">Tentang</a></li>
+            <li><a href="">Fitur</a></li>
+            <li><a href="">Kontak</a></li>
+        </ul>
+    </nav>
 
     <!-- Features Section -->
     <section id="features" class="features">
@@ -38,6 +46,8 @@
             </div>
         </div>
     </section>
+
+    <br><br><br><br>
 
     <!-- CTA Section -->
     <section class="cta">

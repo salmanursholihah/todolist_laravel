@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController;
@@ -28,6 +28,7 @@ use App\Http\Controllers\LemburController;
 use App\Http\Controllers\AdminLemburController;
 use App\Http\Controllers\VoiceNoteController;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,7 +111,7 @@ Route::get('/keuangan/{keuangan}', [KeuanganController::class, 'show'])->name('k
 
 //index umum 
 Route::get ('/',function(){
-    return view('index');
+    return view('home');
 });
 //routing export document
 Route::get('/keuangan/export/excel', [KeuanganExportController::class, 'exportExcel'])->name('keuangan.export.excel');
@@ -274,3 +275,30 @@ Route::middleware(['auth'])->group(function(){
 // Route::get('/lembur-interaktif', function () {
 //     return view('lembur');
 // })->middleware('auth')->name('lembur');  
+
+
+
+//halaman kontak
+// tampilkan halaman kontak (GET)
+Route::get('/kontak', function() {
+    return view('kontak');
+})->name('kontak');
+
+// proses form kontak (POST)
+Route::post('/kontak', function(Illuminate\Http\Request $request) {
+    $validated = $request->validate([
+        'nama' => 'required',
+        'email' => 'required|email',
+        'pesan' => 'required',
+    ]);
+    
+    // proses kirim email / simpan log
+    Log::info('Pesan kontak:', $validated);
+
+    return back()->with('success', 'Pesan Anda berhasil dikirim.');
+})->name('kontak.kirim');
+
+///blog
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
