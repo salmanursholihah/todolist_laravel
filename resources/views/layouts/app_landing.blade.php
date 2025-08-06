@@ -38,7 +38,7 @@
     </main>
 
 
-<footer class="bg-dark text-white pt-5 pb-4 mt-5">
+<footer style="background-color:#44889c; color:white; padding-top:10px; margin-top:5px; padding-buttom:4px;">  
   <div class="container">
     <div class="row">
 
