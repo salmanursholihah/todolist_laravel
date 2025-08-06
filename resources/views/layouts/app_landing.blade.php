@@ -38,68 +38,58 @@
     </main>
 
 
-        <footer class="footer">
-  <div class="footer-top">
-    <div class="footer-logo">
-      <img src="logo-uct.png" alt="uct Logo" class="logo">
-      <p>Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02, 
-        <br>Magelang, Kec. Magelang Utara, Kota Magelang, Jawa Tengah</p>
-      <p><i class="whatsapp-icon">📱</i>08123467858</p>
-      <p><i class="email-icon">📧</i> halo@uct.com</p>
-      <div class="social-icons">
-        <a href="#"><img src="{{ asset('storage/logo/logo-facebook.jpg')}}" alt="Facebook"></a>
-        <a href="#"><img src="{{ asset('storage/logo/logo-twitter.jpg') }}" alt="Twitter"></a>
-        <a href="https://www.tiktok.com/@ospod67?_t=ZS-8ycKl7yOd2G&_r=1"><img src="{{ asset('storage/logo/logo-tiktok.jpg') }}" alt="TikTok"></a>
-        <a href="https://www.instagram.com/pt_utama_ciptatataasri?igsh=MTc1a3Vnem9qN2NvbQ=="><img src="{{ asset('storage/logo/logo-instagram.jpg') }}" alt="Instagram"></a>
-        <a href="https://youtube.com/@ospod-milos?si=pJO2FPcFW9RLsaY9"><img src="{{ asset('storage/logo/logo-youtube.jpg') }}" alt="YouTube"></a>
-        <a href="#"><img src="{{ asset('storage/logo/logo-linkedin.jpg') }}" alt="LinkedIn"></a>
+<footer class="bg-dark text-white pt-5 pb-4">
+  <div class="container">
+    <div class="row">
+
+      <!-- Tentang Kami -->
+      <div class="col-md-3 col-12 mb-4">
+        <h5>Tentang Kami</h5>
+        <p>UCTAdiv adalah platform absensi online pintar yang membantu perusahaan mencatat kehadiran karyawan secara efisien dan akurat.</p>
+      </div>
+
+      <!-- Menu Navigasi -->
+      <div class="col-md-3 col-12 mb-4">
+        <h5>Menu</h5>
+        <ul class="list-unstyled">
+          <li><a href="#home" class="text-white">Beranda</a></li>
+          <li><a href="#fitur" class="text-white">Fitur</a></li>
+          <li><a href="#blog" class="text-white">Blog</a></li>
+          <li><a href="#contact" class="text-white">Kontak</a></li>
+        </ul>
+      </div>
+
+      <!-- Kontak -->
+      <div class="col-md-3 col-12 mb-4">
+        <h5>Kontak</h5>
+        <ul class="list-unstyled">
+          <li>Email: info@uctadiv.com</li>
+          <li>Telp: 0812-3456-7890</li>
+          <li>Alamat: Jl. Contoh No. 123</li>
+        </ul>
+      </div>
+
+      <!-- Google Maps -->
+      <div class="col-md-3 col-12 mb-4">
+        <h5>Lokasi</h5>
+        <div class="ratio ratio-4x3">
+          <iframe
+            src="https://maps.google.com/maps?q=Jakarta&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
       </div>
     </div>
 
-    <div class="footer-links">
-      <div>
-        <h4>Tentang Kami</h4>
-        <ul>
-          <li><a href="#">Tentang</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Jadwalkan Demo</a></li>
-          <li><a href="#">Karir</a></li>
-          <li><a href="#">Login</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Layanan</h4>
-        <ul>
-          <li><a href="#">Cara Registrasi</a></li>
-          <li><a href="#">Panduan Aplikasi</a></li>
-          <li><a href="#">Syarat & Ketentuan</a></li>
-          <li><a href="#">Kebijakan Privasi</a></li>
-          <li><a href="#">Pengembalian Dana</a></li>
-          <li><a href="#">Keamanan Layanan</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Fitur</h4>
-        <ul>
-          <li><a href="#">Absensi Online Gratis</a></li>
-          <li><a href="#">Absensi Karyawan</a></li>
-          <li><a href="#">Aplikasi Absensi Mobile</a></li>
-          <li><a href="#">Employee Self Service</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Lokasi</h4>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.606862730542!2d110.21981317500169!3d-7.465586392545967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a8f06c1ce38eb%3A0xb67783d2e0568c26!2sPJKA%204%20(BKW)!5e1!3m2!1sid!2sid!4v1754383919161!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+    <hr class="border-secondary" />
+    <div class="text-center mt-3">
+      &copy; 2025 UCTAdiv. All rights reserved.
     </div>
   </div>
-  <br><br><br><br>
-
-        <p style="font-weight: bold;">&copy; 2025 uctadiv - Hak cipta dilindungi.</p>
-    </footer>
 </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
