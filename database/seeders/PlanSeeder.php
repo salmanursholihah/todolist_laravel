@@ -20,17 +20,17 @@ class PlanSeeder extends Seeder
 
         Plan::create([
          'name' => 'Paket Basic',
-            'price' => 50000,
+            'price' => 1000,
             'duration_month' => 1,
         ]);
         Plan::create([
             'name' => 'Paket Pro',
-            'price' => 150000,
+            'price' => 2000,
             'duration_month' => 3,
         ]);
         Plan::create([
             'name' => 'Paket Premium',
-            'price' => 500000,
+            'price' => 10000,
             'duration_month' => 12,
         ]);
     }
