@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-#44889c shadow-sm py-4 ">
         <div class="container">
             <a class="navbar-brand" style="font-weight:bold; font-family:arial">Absen Pintar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -22,7 +22,7 @@
             <div class="collapse navbar-collapse font-weight-bold" id="navbarNav">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">beranda</a></li>
-                    <li class="nav-item"><a href="{{ url('/langganan') }}" class="nav-link">Fitur</a></li>
+                    <li class="nav-item"><a href="{{ url('/subscription/select-plan') }}" class="nav-link">Fitur</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="{{ url('/panduan') }}" class="nav-link">Panduan</a></li>
                     <li class="nav-item"><a href="/kontak" class="nav-link">Kontak</a></li>

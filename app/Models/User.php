@@ -64,4 +64,11 @@ public function Absensi()
 {
     return $this->hasMany(Absensi::class);
 }
+
+public function subscriptions()
+{
+    return $this->hasMany(Subscription::class);
+}
+ 
+
 }

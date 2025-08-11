@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\TestMidtransController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +30,12 @@ use App\Http\Controllers\AdminLemburController;
 use App\Http\Controllers\VoiceNoteController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\BlogController;
-
+use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SubscriptionsController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\MidtransController;
+use App\Http\Controllers\TestMiddtransController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -301,4 +307,61 @@ Route::post('/kontak', function(Illuminate\Http\Request $request) {
 ///blog
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
+
+//halaman panduan
+Route::get('/panduan', function (){
+    return view('panduan');
+});
+
+
+
+// //payment
+// Route::middleware(['auth'])->group(function(){
+// Route::get('/langganan', [PaymentController::class, 'paket'])->name('langganan.index');
+// Route::post('/bayar', [PaymentController::class, 'pay'])->name('bayar');
+// Route::post('/midtrans/callback', [PaymentController::class, 'midtransCallback'])->name('midtrans.callback');
+// Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+// });
+
+
+
+// //subscriptions
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/plans', [SubscriptionsController::class, 'showPlans'])->name('plans');
+//     Route::post('/subscribe', [SubscriptionsController::class, 'subscribe'])->name('subscribe');
+// });
+// ///midtrans
+// Route::post('/midtrans/callback', [SubscriptionsController::class, 'callback'])->name('midtrans.callback');
+
+
+
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('/plans', [PlanController::class,'index'])->name('plans.index');
+    Route::post('/checkout', [PaymentController::class,'checkout'])->name('checkout');
+    
+});
+
+// Midtrans notification (no csrf)
+Route::post('/midtrans/notification', [MidtransController::class,'notificationHandler'])->name('midtrans.notification');
+
+
+
+
+///midtrans
+Route::middleware(['auth'])->group(function() {
+    Route::get('/subscription/select-plan', [SubscriptionsController::class, 'selectPlan'])->name('subscription.selectPlan');
+    Route::post('/subscription/select-plan', [SubscriptionsController::class, 'postSelectPlan']);
+
+    Route::get('/subscription/step/{step}', [SubscriptionsController::class, 'showStep'])->name('subscription.step');
+    Route::post('/subscription/step/{step}', [SubscriptionsController::class, 'postStep']);
+
+    Route::get('/subscription/checkout', [SubscriptionsController::class, 'checkout'])->name('subscription.checkout');
+    Route::post('/subscription/payment', [SubscriptionsController::class, 'processPayment'])->name('subscription.payment');
+});
+
+// Midtrans callback (POST)
+Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
+
 
