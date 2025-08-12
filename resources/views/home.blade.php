@@ -92,15 +92,17 @@ terima kasih sudah berkunjung ke portal kami,
             <div class="col-md-4 mb-3">
                 <h5>Praktis dan otomatis</h5>
                 <p>pengelolaan jadwal,kalender,absensi, izin dan cuti bahkan sampai laporan pekerjaan harian karyawan dapat dilakukan scara terstruktur efisien dan mudah</p>
+                <img src="{{ asset('storage/logo/praktis.jpg') }}" alt="gambar ilustrasi" class="img-fluid mt-4 text-center">
             </div>
             <div class="col-md-4 mb-3">
                 <h5>skalable</h5>
                 <p>cocok untuk bisnis kecil hingga Perusahaan besar</p>
-                        <img src="{{ asset('storage/logo/image.png')  }}" alt="gambar ilustrasi" class="img-fluid mt-4 text-center">
+                        <img src="{{ asset('storage/logo/ilustrasi.png')  }}" alt="gambar ilustrasi" class="img-fluid mt-4 text-center">
             </div>
             <div class="col-md-4 mb-3">
                 <h5>Real time</h5>
                 <p>analisis laporan yang kapan saja secara langsung</p>
+                <img src="{{ asset('storage/logo/realtime.jpg') }}" alt="gambar ilustrasi" class="img-fluid mt-4 text-center">
             </div>
         </div>
     </div>
