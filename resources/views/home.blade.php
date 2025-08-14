@@ -187,15 +187,16 @@ let interval = setInterval(function() {
 <!-- Iklan Produk -->
 <div class="text-center my-4">
     <a href="https://milospro.com" target="_blank">
-        <img src="https://milospro.com/storage/product-images/selang-tubin.jpg" 
-             alt="Selang Tubin" 
-             style="max-width: 300px; height: auto; border: 1px solid #ddd; border-radius: 8px;">
+        <img src="{{ asset('storage/logo/gambar_iklan.png') }}" alt="product milosshop" 
+        style="max-width: 300px; height: auto; border: 1px solid #ddd; border-radius: 8px;">
     </a>
+
     <div class="mt-2">
         <strong>Selang Tubin</strong><br>
         <small>Produk berkualitas dari Milospro</small>
     </div>
 </div>
+
 
 
 {{-- ===== TENTANG KAMI ===== --}}
