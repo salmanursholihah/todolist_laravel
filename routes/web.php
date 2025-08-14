@@ -36,6 +36,9 @@ use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\TestMiddtransController;
+use App\Http\Controllers\AdsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BackendAdController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,9 +61,28 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Public Dashboard
-Route::middleware('auth')->get('/dashboard', function () {
+
+// Route::middleware('auth')->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+
+
+// Route::middleware('auth', 'check.subscription')->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+
+Route::middleware(['auth', 'check.subscription'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+
+
+
+
+// Route::middleware('auth', 'check.subscription')->get('/dashboard')->name('absensi.index');
+
+
 
 
 //forgot password
@@ -116,9 +138,11 @@ Route::get('/keuangan/{keuangan}', [KeuanganController::class, 'show'])->name('k
 
 
 //index umum 
-Route::get ('/',function(){
-    return view('home');
-});
+// Route::get ('/',function(){
+//     return view('home');
+// });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 //routing export document
 Route::get('/keuangan/export/excel', [KeuanganExportController::class, 'exportExcel'])->name('keuangan.export.excel');
 Route::get('/keuangan/export/pdf', [KeuanganExportController::class, 'exportPDF'])->name('keuangan.export.pdf');
@@ -165,6 +189,7 @@ Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')-
 
 
 ///laporan catatan
+
 
 Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function(){
     Route::get('catatans', [AdminCatatanController::class, 'index'])->name('catatans.index');
@@ -360,8 +385,49 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/subscription/checkout', [SubscriptionsController::class, 'checkout'])->name('subscription.checkout');
     Route::post('/subscription/payment', [SubscriptionsController::class, 'processPayment'])->name('subscription.payment');
 });
-
 // Midtrans callback (POST)
 Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
 
 
+// Route::middleware(['auth', 'check.subscription'])->group(function () {
+//     Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+//     Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store');
+// });
+
+
+
+// route/web.php
+Route::get('/subscription/activate/{id}', function($id) {
+    $sub = \App\Models\Subscription::find($id);
+    if ($sub) {
+        $months = $sub->plan->duration_month ?? 1;
+        $sub->status = 'active';
+        $sub->expired_at = now()->addMonths($months);
+        $sub->save();
+    }
+    return redirect()->route('dashboard');
+})->name('subscription.activate');
+
+
+
+
+
+///iklan
+// Route::get('/ads', function () {
+//     $ads = \App\Models\Ad::where('active', true)->get();
+//     return view('ads.index', compact('ads'));
+// })->name('ads.index');
+
+
+Route::get('/ads', [AdsController::class, 'index']);
+
+
+// ///iklan
+// Route::get('/',[App\Http\Controllers\AdsController::class, 'index']);
+
+
+////backend iklan
+Route::prefix('admin')->name('admin.')->middleware('auth')->group (function(){
+Route::resource('ads', BackendAdController::class)->except(['show']);
+
+});

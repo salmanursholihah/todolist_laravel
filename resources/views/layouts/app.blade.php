@@ -108,6 +108,10 @@
             <i class="fa-solid fa-user fa-lg"></i>
             <div>Profil</div>
         </a>
+        <a href="{{ url('/logout') }}" class="{{ request()->is('logout') ? 'active' : '' }}">
+            <i class="fa-solid fa-user fa-lg"></i>
+            <div>logout</div>
+        </a>
     </nav>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
