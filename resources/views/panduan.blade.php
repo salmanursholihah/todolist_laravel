@@ -64,7 +64,70 @@
                 </div>
             </div>
         </div>
+<!-- Panduan Langganan -->
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingLangganan">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLangganan">
+            4. Panduan Penggunaan Fitur Langganan
+        </button>
+    </h2>
+    <div id="collapseLangganan" class="accordion-collapse collapse" data-bs-parent="#panduanAccordion">
+        <div class="accordion-body">
+            <ol>
+                <li>
+                    Masuk ke fitur langganan
+                    <br>
+                    <img src="{{ asset('storage/logo/step1.png') }}" alt="Step 1 Masuk Fitur Langganan" class="img-fluid my-2">
+                </li>
+                <li>
+                    Pilih paket langganan <br>
+                    <small>Nb: pilih paket basic Rp.1000/bulan untuk uji coba</small>
+                    <br>
+                    <img src="{{ asset('storage/logo/step2.png') }}" alt="Step 2 Pilih Paket" class="img-fluid my-2">
+                </li>
+                <li>
+                    Isi data perusahaan, alamat perusahaan, nama contact perusahaan dan nomor telephone
+                    <br>
+                    <img src="{{ asset('storage/logo/step3.png') }}" alt="Step 3 Isi Data Perusahaan" class="img-fluid my-2">
+                </li>
+                <li>
+                    Lanjut checkout paket langganan dengan klik “lanjut checkout”
+                    <br>
+                </li>
+                <li>
+                    Pastikan data yang anda isi sudah benar
+                    <br>
+                </li>
+                <li>
+                    Kemudian klik bayar sekarang
+                    <br>
+                </li>
+                <li>
+                    Bayar dengan Midtrans
+                    <br>
+                </li>
+                <li>
+                    Pilih metode pembayaran
+                    <br>
+                    <img src="{{ asset('storage/logo/payment.png') }}" alt="Step 8 Pilih Metode" class="img-fluid my-2">
+                </li>
+                <li>
+                    Jika menggunakan QRIS GoPay, copy barcode pembayaran kemudian ditempel di halaman berikut:
+                    <br>
+                    <a href="https://simulator.sandbox.midtrans.com/v2/qris/index" target="_blank">Simulator QRIS GoPay</a>
+                    <br>
+                    <img src="{{ asset('storage/logo/simulator.png') }}" alt="Step 9 QRIS GoPay" class="img-fluid my-2">
+                </li>
+                <li>
+                    Tunggu proses pembayaran selesai, kemudian anda akan diarahkan ke halaman absensi
+                    <br>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
 
     </div>
 </div>
+
 @endsection
