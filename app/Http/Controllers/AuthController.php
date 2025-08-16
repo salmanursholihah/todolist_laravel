@@ -112,6 +112,18 @@ public function store(Request $request): RedirectResponse
     return redirect()->route('users.index')->with('success', 'User dinonaktifkan.');
 }
 
+
+protected function authenticated($request, $user)
+{
+    if ($user->isSubscribed()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('subscription.selectPlan');
+}
+
+
+
+
             }
 
     

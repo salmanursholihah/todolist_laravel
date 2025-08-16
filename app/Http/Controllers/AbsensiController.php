@@ -11,13 +11,24 @@ use Illuminate\Support\Facades\Storage;
 class AbsensiController extends Controller
 {
     public function index()
-    {
-        $absen = Absensi::where('user_id', Auth::id())
-                        ->whereDate('created_at', now()->toDateString())
-                        ->first();
+    // {
+    //     $absen = Absensi::where('user_id', Auth::id())
+    //                     ->whereDate('created_at', now()->toDateString())
+    //                     ->first();
 
-        return view('absensi.index', compact('absen'));
+    //     return view('absensi.index', compact('absen'));
+    // }
+
+{
+    if(!auth()->user()->isSubscribed()){
+        return redirect()->route('subscription.index')
+                         ->with('error', 'Anda harus berlangganan untuk mengakses fitur ini.');
     }
+
+    $absensi = Absensi::where('user_id', auth()->id())->get();
+    return view('absensi.index', compact('absensi'));
+}
+
 
     public function store(Request $request)
     {

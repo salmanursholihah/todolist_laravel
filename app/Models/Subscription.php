@@ -10,11 +10,16 @@ class Subscription extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'plan_id',
+        'updtated_at',
         'status',
+        'start_date',
+        'plan_id',
         'order_id',
-        'expired_at',
+        'id',
         'details',
+        'expired_at',
+        'end_date',
+        'created_at',
     ];
 
     protected $casts = [

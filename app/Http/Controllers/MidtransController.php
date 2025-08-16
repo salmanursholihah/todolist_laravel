@@ -7,61 +7,77 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Notification;
+use Illuminate\Support\Facades\Log;
 
 class MidtransController extends Controller
 {
+
     public function callback(Request $request)
     {
-        Config::$serverKey = config('midtrans.server_key');
-        Config::$isProduction = config('midtrans.is_production');
-        Config::$isSanitized = true;
-        Config::$is3ds = true;
+        // Ambil data transaksi dari Midtrans
+        $orderId = $request->order_id;
+        $transactionStatus = $request->transaction_status ?? 'pending';
+        $paymentType = $request->payment_type ?? null;
+        $grossAmount = $request->gross_amount ?? 0;
+        $customerDetails = $request->customer_details ?? [];
 
-        $notification = new Notification();
+        $user = Auth::user();
 
-        $orderId = $notification->order_id;
-        preg_match('/SUBS-(\d+)-/', $orderId, $matches);
-        $subscriptionId = $matches[1] ?? null;
+        // Simpan ke database subscription
+        $subscription = Subscription::updateOrCreate(
+            ['order_id' => $orderId],
+            [
+                'user_id' => $user->id,
+                'status' => $transactionStatus,
+                'payment_type' => $paymentType,
+                'amount' => $grossAmount,
+                'meta' => json_encode([
+                    'phone' => $customerDetails['phone'] ?? '',
+                    'company_name' => $customerDetails['company_name'] ?? '',
+                    'contact_person' => $customerDetails['contact_person'] ?? '',
+                    'company_address' => $customerDetails['company_address'] ?? '',
+                ]),
+                'start_date' => Carbon::now(),
+                'end_date' => Carbon::now()->addMonth(), // misal 1 bulan langganan
+            ]
+        );
 
-        if (!$subscriptionId) {
-            return response()->json(['message' => 'Invalid order ID'], 400);
+        // Redirect ke dashboard setelah transaksi sukses
+        if ($transactionStatus === 'settlement' || $transactionStatus === 'capture') {
+            return redirect()->route('absensi.dashboard')->with('success', 'Langganan aktif!');
         }
 
-        $subscription = Subscription::find($subscriptionId);
-        $payment = Payment::where('subscription_id', $subscriptionId)
-            ->where('order_id', $orderId)
-            ->first();
+        return redirect()->route('subscription.choose')->with('error', 'Transaksi belum selesai.');
+    }
 
-        if (!$subscription || !$payment) {
-            return response()->json(['message' => 'Not found'], 404);
-        }
+    private function activateSubscription($subscription, $payment)
+    {
+        $duration = $subscription->plan->duration_month ?? 1;
 
-        $transactionStatus = $notification->transaction_status;
-        $fraudStatus = $notification->fraud_status;
-
-        if ($transactionStatus == 'capture') {
-            if ($fraudStatus == 'accept') {
-                $subscription->status = 'active';
-                $subscription->expired_at = now()->addMonths($subscription->plan->duration_month);
-                $payment->status = 'success';
-            } else {
-                $subscription->status = 'pending';
-                $payment->status = 'challenge';
-            }
-        } elseif ($transactionStatus == 'settlement') {
-            $subscription->status = 'active';
-            $subscription->expired_at = now()->addMonths($subscription->plan->duration_month);
-            $payment->status = 'success';
-        } elseif (in_array($transactionStatus, ['deny', 'cancel', 'expire'])) {
-            $subscription->status = 'cancelled';
-            $payment->status = 'failed';
-        } elseif ($transactionStatus == 'pending') {
-            $payment->status = 'pending';
-        }
-
+        // Update subscription
+        $subscription->status = 'active';
+        $subscription->start_date = now();
+        $subscription->end_date = now()->addMonths($duration);
+        $subscription->expired_at = now()->addMonths($duration);
         $subscription->save();
+
+        // Update payment
+        $payment->status = 'success';
         $payment->save();
 
-        return response()->json(['message' => 'OK']);
+        // Update user
+        if ($subscription->user) {
+            $user = $subscription->user;
+            $user->status_langganan = 'aktif';
+            $user->tanggal_expired = now()->addMonths($duration);
+            $user->save();
+        }
+
+        Log::info('Subscription Activated', [
+            'subscription_id' => $subscription->id,
+            'user_id' => $subscription->user_id,
+            'start_date' => $subscription->start_date,
+            'end_date' => $subscription->end_date
+        ]);
     }
 }

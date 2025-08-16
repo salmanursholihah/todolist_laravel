@@ -36,6 +36,7 @@ use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\TestMiddtransController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,9 +59,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Public Dashboard
-Route::middleware('auth')->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware('auth')->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+
 
 
 //forgot password
@@ -350,18 +352,53 @@ Route::post('/midtrans/notification', [MidtransController::class,'notificationHa
 
 
 ///midtrans
+// Route::middleware(['auth'])->group(function() {
+//     Route::get('/subscription/select-plan', [SubscriptionsController::class, 'selectPlan'])->name('subscription.selectPlan');
+//     Route::post('/subscription/select-plan', [SubscriptionsController::class, 'postSelectPlan']);
+
+//     Route::get('/subscription/step/{step}', [SubscriptionsController::class, 'showStep'])->name('subscription.step');
+//     Route::post('/subscription/step/{step}', [SubscriptionsController::class, 'postStep']);
+
+//     Route::get('/subscription/checkout', [SubscriptionsController::class, 'checkout'])->name('subscription.checkout');
+//     Route::post('/subscription/payment', [SubscriptionsController::class, 'processPayment'])->name('subscription.payment');
+// });
+
+// // Midtrans callback (POST)
+// Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
+
+
+
+// //menghubungkan fitur absensi dengan fitur langganan 
+// Route::middleware(['auth', 'check.subscription'])->group(function () {
+//     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// });
+
+
+
+// Langganan
 Route::middleware(['auth'])->group(function() {
     Route::get('/subscription/select-plan', [SubscriptionsController::class, 'selectPlan'])->name('subscription.selectPlan');
     Route::post('/subscription/select-plan', [SubscriptionsController::class, 'postSelectPlan']);
-
     Route::get('/subscription/step/{step}', [SubscriptionsController::class, 'showStep'])->name('subscription.step');
     Route::post('/subscription/step/{step}', [SubscriptionsController::class, 'postStep']);
-
     Route::get('/subscription/checkout', [SubscriptionsController::class, 'checkout'])->name('subscription.checkout');
     Route::post('/subscription/payment', [SubscriptionsController::class, 'processPayment'])->name('subscription.payment');
 });
 
-// Midtrans callback (POST)
+// Midtrans callback
 Route::post('/midtrans/callback', [MidtransController::class, 'callback']);
 
+// Dashboard absensi hanya untuk user berlangganan aktif
+Route::middleware(['auth', 'check.subscription'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
+
+
+
+
+// ///menghubungkan absensi dengan fitur belum berhasil
+// Route::middleware(['auth', 'subscribed'])->group(function () {
+//     Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
+//     Route::post('/absensi/masuk', [AbsensiController::class, 'masuk'])->name('absensi.masuk');
+// });

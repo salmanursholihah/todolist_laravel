@@ -22,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status_langganan',
+        'tanggal_expired',
     ];
 
     /**
@@ -65,10 +67,27 @@ public function Absensi()
     return $this->hasMany(Absensi::class);
 }
 
-public function subscriptions()
+public function subscription()
 {
-    return $this->hasMany(Subscription::class);
+    return $this->hasOne(Subscription::class)->latestOfMany();
 }
- 
+
+// Helper untuk cek langganan aktif
+public function isSubscribed()
+{
+    $subscription = $this->subscription;
+
+    return $subscription &&
+           $subscription->status === 'active' &&
+           $subscription->expired_at &&
+           now()->lte($subscription->expired_at);
+}
+
 
 }
+
+
+
+
+
+
