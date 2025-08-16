@@ -37,6 +37,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\TestMiddtransController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminSubscriptionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -393,6 +394,13 @@ Route::middleware(['auth', 'check.subscription'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 
+
+
+////backend
+Route::middleware(['auth', 'CheckRole:admin'])->group(function() {
+    Route::get('/admin/subscriptions', [AdminSubscriptionController::class, 'index'])->name('admin.subscriptions.index');
+    Route::post('/admin/subscriptions/{id}/activate', [AdminSubscriptionController::class, 'activate'])->name('admin.subscriptions.activate');
+});
 
 
 

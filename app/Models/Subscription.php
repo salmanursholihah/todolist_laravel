@@ -25,6 +25,7 @@ class Subscription extends Model
     protected $casts = [
         'details' => 'array',
         'expired_at' => 'datetime',
+        'start_date' => 'datetime',
     ];
 
     public function user()
