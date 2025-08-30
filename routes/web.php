@@ -38,6 +38,8 @@ use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\TestMiddtransController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminSubscriptionController;
+use App\Http\Controllers\PesanController;
+use App\Http\Controllers\JadwalController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -264,7 +266,7 @@ Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')-
 });
 
 ///download laporan lembur
-Route::post('/export-lembur', [AdminLemburController::class, 'exportPerBulan' ])->name('export.perbulan');
+// Route::post('/export-lembur', [AdminLemburController::class, 'exportPerBulan' ])->name('export.perbulan');
 Route::post('export-lembur-peruser', [AdminLemburController::class, 'exportPerUser'])->name('admin.lembur.export_puser');
 
 
@@ -288,24 +290,35 @@ Route::middleware(['auth'])->group(function(){
 
 
 //halaman kontak
-// tampilkan halaman kontak (GET)
-Route::get('/kontak', function() {
-    return view('kontak');
-})->name('kontak');
+// // tampilkan halaman kontak (GET)
+// Route::get('/kontak', function() {
+//     return view('kontak');
+// })->name('kontak');
 
-// proses form kontak (POST)
-Route::post('/kontak', function(Illuminate\Http\Request $request) {
-    $validated = $request->validate([
-        'nama' => 'required',
-        'email' => 'required|email',
-        'pesan' => 'required',
-    ]);
+
+// // proses form kontak (POST)
+// Route::post('/kontak', function(Illuminate\Http\Request $request) {
+//     $validated = $request->validate([
+//         'nama' => 'required',
+//         'email' => 'required|email',
+//         'pesan' => 'required',
+//     ]);
     
-    // proses kirim email / simpan log
-    Log::info('Pesan kontak:', $validated);
+//     // proses kirim email / simpan log
+//     Log::info('Pesan kontak:', $validated);
 
-    return back()->with('success', 'Pesan Anda berhasil dikirim.');
-})->name('kontak.kirim');
+//     return back()->with('success', 'Pesan Anda berhasil dikirim.');
+// })->name('kontak.kirim');
+
+Route::get('/kontak', [PesanController::class, 'form'])->name('kontak');
+Route::post('/kontak', [PesanController::class, 'kirim'])->name('kontak.kirim');
+
+// halaman admin untuk baca pesan
+Route::prefix('admin')->group(function () {
+    Route::get('/kontak', [PesanController::class, 'index'])->name('admin.kontak.index');
+    Route::get('/kontak/{id}', [PesanController::class, 'show'])->name('admin.kontak.show');
+});
+
 
 ///blog
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
@@ -410,3 +423,8 @@ Route::middleware(['auth', 'CheckRole:admin'])->group(function() {
 //     Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
 //     Route::post('/absensi/masuk', [AbsensiController::class, 'masuk'])->name('absensi.masuk');
 // });
+
+
+
+///fitur jadwal harian statis
+Route::get('/Jadwal-harian', [JadwalController::class, 'index'])->name('jadwal.index');

@@ -155,6 +155,35 @@ public function exportPerUser(Request $request)
     return $pdf->download("catatan_{$user->name}.pdf");
 }
 
+public function exportPerUserPerBulan(Request $request)
+{
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'month' => 'required|numeric|min:1|max:12',
+        'year' => 'required|numeric|min:2000|max:' . now()->year,
+    ]);
+
+    $user = User::findOrFail($request->user_id);
+    $month = $request->month;
+    $year = $request->year;
+
+    $catatans = Catatan::where('user_id', $user->id)
+                        ->whereMonth('created_at', $month)
+                        ->whereYear('created_at', $year)
+                        ->get();
+
+    if ($catatans->isEmpty()) {
+        return redirect()->route('admin.catatans.index')->with('error', 'Data tidak ditemukan.');
+    }
+
+    $catatans = $this->toUtf8($catatans);
+    $user = $this->toUtf8($user);
+
+    $pdf = Pdf::loadView('admin.catatans.export_user_per_bulan', compact('catatans', 'user', 'month', 'year'));
+    $pdf->setPaper('A4', 'landscape');
+
+    return $pdf->download("catatan_{$user->name}_{$month}_{$year}.pdf");
+}
 private function toUtf8($data)
 {
     if (is_array($data)) {
