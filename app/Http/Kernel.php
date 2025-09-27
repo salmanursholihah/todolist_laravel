@@ -74,4 +74,9 @@ class Kernel extends HttpKernel
 
 
     ];
+
+    protected function schedule(Schedule $scedule)
+    {
+        $schedule->command('remider:catatan')->dailyAt('14.30');
+    }
 }

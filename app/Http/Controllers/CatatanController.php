@@ -31,41 +31,56 @@ class CatatanController extends Controller
         return view('catatan', compact('catatans', 'showMonthlyForm'));
     }
     
+public function store(Request $request)
+{
+    $today   = now()->toDateString();
+    $userId  = auth()->id();
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string',
-            'description' => 'nullable|string',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'kendala' => 'nullable|string',
-            'solusi' => 'nullable|string',
-            'target' => 'nullable|string',
-        ]);
-
-        $catatan = Catatan::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'user_id' => auth()->id(),
-            'kendala' => $request->kendala ?: null,
-            'solusi' => $request->solusi ?: null,
-            'target' => $request->target ?: null,
-            'periode' => now()->format('Y-m'),
-        ]);
-
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $filename = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('uploads'), $filename);
-
-                $catatan->images()->create([
-                    'image_path' => 'uploads/' . $filename,
-                ]);
-            }
-        }
-
-        return redirect()->back()->with('success', 'Catatan berhasil ditambahkan!');
+    if (!$userId) {
+        return redirect()->back()->withErrors('Anda harus login untuk membuat catatan.');
     }
+
+    $alreadyExists = Catatan::where('user_id', $userId)
+        ->whereDate('created_at', $today)
+        ->exists();
+
+    if ($alreadyExists) {
+        return redirect()->back()->withErrors('Kamu sudah membuat catatan hari ini.');
+    }
+
+    $request->validate([
+        'title'       => 'required|string',
+        'description' => 'required|string',
+        'images.*'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'kendala'     => 'nullable|string',
+        'solusi'      => 'nullable|string',
+        'target'      => 'nullable|string',
+    ]);
+
+    $catatan = Catatan::create([
+        'title'       => $request->title,
+        'description' => $request->description,
+        'user_id'     => $userId,
+        'kendala'     => $request->kendala,
+        'solusi'      => $request->solusi,
+        'target'      => $request->target,
+        'periode'     => now()->format('Y-m'),
+    ]);
+
+    // Simpan gambar
+    if ($request->hasFile('images')) {
+        foreach ($request->file('images') as $image) {
+            $filename = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('uploads'), $filename);
+
+            $catatan->images()->create([
+                'image_path' => 'uploads/' . $filename,
+            ]);
+        }
+    }
+
+    return redirect()->back()->with('success', 'Catatan berhasil ditambahkan!');
+}
 
     public function destroy(Catatan $catatan)
     {
