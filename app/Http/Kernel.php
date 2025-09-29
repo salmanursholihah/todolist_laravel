@@ -78,7 +78,7 @@ class Kernel extends HttpKernel
 
    protected function schedule(Schedule $schedule)
 {
-    $schedule->command('reminder:catatan')->dailyAt('11:23');
+$schedule->command('reminder:catatan')->everyMinute();
 }
 
 }
