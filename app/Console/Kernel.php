@@ -11,33 +11,32 @@ class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Generate Payment bulanan
+        $schedule->call(function () {
+            $subs = Subscription::where('status', 'active')
+                ->whereHas('plan', fn($q) => $q->where('billing_type', 'pascabayar'))
+                ->get();
 
-     $schedule->call(function () {
-    $subs = Subscription::where('status', 'active')->whereHas('plan', fn($q) => $q->where('billing_type', 'pascabayar'))->get();
-    foreach ($subs as $sub) {
-        Payment::create([
-            'subscription_id' => $sub->id,
-            'amount' => $sub->plan->price,
-            'status' => 'unpaid',
-        ]);
+            foreach ($subs as $sub) {
+                Payment::create([
+                    'subscription_id' => $sub->id,
+                    'amount'          => $sub->plan->price,
+                    'status'          => 'unpaid',
+                ]);
+            }
+        })->monthly();
+
+        // Reminder Catatan (contoh: tiap menit untuk testing)
+        $schedule->command('reminder:catatan')->everyMinute();
     }
-})->monthly(); 
-}
-    
 
     /**
      * Register the commands for the application.
-     *
-     * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
 
