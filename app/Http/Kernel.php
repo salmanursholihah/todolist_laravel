@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Console\Scheduling\Schedule;
 
 class Kernel extends HttpKernel
 {
@@ -75,8 +76,9 @@ class Kernel extends HttpKernel
 
     ];
 
-    protected function schedule(Schedule $scedule)
-    {
-        $schedule->command('remider:catatan')->dailyAt('11.16');
-    }
+   protected function schedule(Schedule $schedule)
+{
+    $schedule->command('reminder:catatan')->dailyAt('11:23');
+}
+
 }
