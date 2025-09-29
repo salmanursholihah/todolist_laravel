@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Halo, {{ $user->name }}</h2>
-    <p>Sepertinya kamu belum mengisi catatan harian hari ini.</p>
+    <p>Sepertinya kamu belum mengisi catatan harian hari ini ({{ now()->format('d,M,Y') }}).</p>
     <p>Jangan lupa isi sebelum jam 23:59 ya 🙏</p>
     <p>Terima kasih.</p>
 </body>
