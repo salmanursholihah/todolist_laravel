@@ -79,10 +79,10 @@
 </div>
 
 <script>
-// document.getElementById('nextToMonthly').addEventListener('click', function() {
-//     document.getElementById('step-1').style.display = 'none';
-//     document.getElementById('step-2').style.display = 'block';
-// });
+document.getElementById('nextToMonthly').addEventListener('click', function() {
+    document.getElementById('step-1').style.display = 'none';
+    document.getElementById('step-2').style.display = 'block';
+});
 </script>
 
 @endsection

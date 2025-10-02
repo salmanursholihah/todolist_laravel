@@ -31,6 +31,10 @@ class Kernel extends ConsoleKernel
 
         // Reminder Catatan (contoh: tiap menit untuk testing)
         $schedule->command('reminder:catatan')->dailyAt('18.00');
+ 
+        // reminder untuk evaluasi bulanan Setiap tanggal 24 jam 09:00
+        $schedule->command('reminder:evaluasi-bulanan')
+             ->monthlyOn(24, '09:00');
     }
 
     /**
