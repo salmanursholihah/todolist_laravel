@@ -10,8 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Lembur</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
-     crossorigin="anonymous"></script>
 </head>
 <body>
 
