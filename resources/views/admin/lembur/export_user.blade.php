@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Laporan Lembur User {{ $user->name ?? 'Nama tidak ditemukan' }}</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
+     crossorigin="anonymous"></script>
     <style>
         body {
             font-family: DejaVu Sans, sans-serif;
