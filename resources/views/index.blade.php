@@ -7,6 +7,8 @@
     <title>mytodo.my.id</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="{{ asset('assets/style/style_index.css') }}">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
+     crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -66,3 +68,5 @@
 </body>
 
 </html>
+
+<!--cekcekcekcek-->
