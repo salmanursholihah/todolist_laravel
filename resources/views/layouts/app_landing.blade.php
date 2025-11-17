@@ -23,10 +23,11 @@
             <div class="collapse navbar-collapse font-weight-bold" id="navbarNav">
                 <ul class="navbar-nav ms-auto ">
                     <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">beranda</a></li>
+                    <li class="nav-item"><a href="{{ url('/about')}}" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="{{ url('/subscription/select-plan') }}" class="nav-link">Fitur</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="{{url('/blog')}}" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="{{ url('/panduan') }}" class="nav-link">Panduan</a></li>
-                    <li class="nav-item"><a href="/kontak" class="nav-link">Kontak</a></li>
+                    <li class="nav-item"><a href="{{url('/kontak')}}" class="nav-link">Kontak</a></li>
                     <li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link">Absensi</a></li>
                     <li class="nav-item"><a href="{{  url('/register')}}" class="nav-link">Daftar</a></li>
                     <li class="nav-item"><a href="{{ url('/login') }}" class="nav-link">Masuk</a></li>

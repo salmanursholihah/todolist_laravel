@@ -14,10 +14,17 @@ class BlogController extends Controller
         return view('blog.index', compact('posts'));
     }
 
-    public function show($slug)
-    {
-        $post = Post::where('slug', $slug)->firstOrFail();
-        return view('blog.show', compact('post'));
+ public function show($id)
+{
+    $view = 'blog.blog' . $id;
+
+    if (!view()->exists($view)) {
+        abort(404);
     }
 
+    return view($view);
+}
+
+
+    
 }

@@ -38,8 +38,10 @@ use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\TestMiddtransController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminSubscriptionController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\AboutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -309,20 +311,26 @@ Route::middleware(['auth'])->group(function(){
 
 //     return back()->with('success', 'Pesan Anda berhasil dikirim.');
 // })->name('kontak.kirim');
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 
-Route::get('/kontak', [PesanController::class, 'form'])->name('kontak');
-Route::post('/kontak', [PesanController::class, 'kirim'])->name('kontak.kirim');
+Route::get('/kontak', [ContactController::class, 'index'])->name('kontak.index');
+Route::post('/kontak/kirim', [ContactController::class, 'kirim'])->name('kontak.kirim');
 
 // halaman admin untuk baca pesan
 Route::prefix('admin')->group(function () {
-    Route::get('/kontak', [PesanController::class, 'index'])->name('admin.kontak.index');
-    Route::get('/kontak/{id}', [PesanController::class, 'show'])->name('admin.kontak.show');
+    Route::get('/kontak', [ContactController::class, 'index'])->name('admin.kontak.index');
+    Route::get('/kontak/{id}', [ContactController::class, 'show'])->name('admin.kontak.show');
 });
 
 
 ///blog
+//    
+
+// Halaman list
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
+// Halaman per blog statik
+Route::get('/blog/{id}', [BlogController::class, 'show'])->where('id', '[0-9]+')->name('blog.show');
 
 
 //halaman panduan

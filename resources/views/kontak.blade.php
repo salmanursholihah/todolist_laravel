@@ -10,7 +10,7 @@
                 <p>Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02,<br> Magelang, Kec. Magelang Utara, Kota Magelang, <br>Jawa Tengah</p>
                 <h5>Kontak</h5>
                 <p>WhatsApp: <a href="https://wa.me/62xxxxxxxx">+62 8xxx xxxx</a></p>
-                <p>Email: info@uct.com</p>
+                <p>Email: ptutamaciptatataasri@gmail.com</p>
                 <h5>Jam Operasional</h5>
                 <p>Senin - Sabtu, 08.00 - 16.00 WIB</p>
                 
