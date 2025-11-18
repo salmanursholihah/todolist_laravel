@@ -10,31 +10,31 @@
 
 <body>
     <h3>Politik Sehat: Pentingnya Literasi Politik bagi Generasi Muda</h3>
-    <p>**Politik sering dianggap sebagai dunia yang kotor atau penuh konflik. Padahal politik adalah cara masyarakat
+    <p>Politik sering dianggap sebagai dunia yang kotor atau penuh konflik. Padahal politik adalah cara masyarakat
         menentukan masa depan negara. Generasi muda harus memiliki literasi politik agar mereka dapat berpartisipasi
-        secara sehat dan cerdas.**
+        secara sehat dan cerdas.
 
 <br><br><br>
 
-        **Literasi politik membantu seseorang memahami bagaimana pemerintahan bekerja, bagaimana kebijakan dibuat, dan
+        Literasi politik membantu seseorang memahami bagaimana pemerintahan bekerja, bagaimana kebijakan dibuat, dan
         apa dampaknya bagi kehidupan sehari-hari. Di era digital, informasi politik bisa datang dari mana saja, termasuk
-        sumber tidak terpercaya.**
+        sumber tidak terpercaya.
 
 <br><br><br>
 
-        **Tanpa literasi politik, anak muda mudah terpengaruh propaganda atau berita palsu. Mereka bisa terlibat dalam
-        debat tidak sehat atau mengambil keputusan yang tidak berdasarkan fakta.**
+        Tanpa literasi politik, anak muda mudah terpengaruh propaganda atau berita palsu. Mereka bisa terlibat dalam
+        debat tidak sehat atau mengambil keputusan yang tidak berdasarkan fakta.
 
 <br><br><br>
 
-        **Politik sehat tidak selalu berarti mendukung partai tertentu. Ia bisa bermakna diskusi yang santun, peduli isu
+        Politik sehat tidak selalu berarti mendukung partai tertentu. Ia bisa bermakna diskusi yang santun, peduli isu
         publik, atau memberikan kritik konstruktif. Generasi muda harus dilatih untuk memahami perbedaan pendapat tanpa
-        permusuhan.**
+        permusuhan.
 
 <br><br><br>
 
-        **Jika literasi politik meningkat, maka demokrasi pun menjadi lebih dewasa. Masyarakat bisa memilih pemimpin
-        secara objektif dan mengawasi kebijakan pemerintah dengan cara yang benar.**</p>
+        Jika literasi politik meningkat, maka demokrasi pun menjadi lebih dewasa. Masyarakat bisa memilih pemimpin
+        secara objektif dan mengawasi kebijakan pemerintah dengan cara yang benar.</p>
 </body>
 
 </html>

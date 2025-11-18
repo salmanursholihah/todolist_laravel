@@ -69,12 +69,12 @@
       <div class="col-lg-3 col-md-6 mb-4">
         <h5>Tentang Kami</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-white">Tentang</a></li>
-          <li><a href="#" class="text-white">Blog</a></li>
-          <li><a href="#" class="text-white">FAQ</a></li>
+          <li><a href="{{url('/about')}}" class="text-white">Tentang</a></li>
+          <li><a href="{{url('/blog')}}" class="text-white">Blog</a></li>
+          <li><a href="{{url('/kontak')}}" class="text-white">FAQ</a></li>
           <li><a href="#" class="text-white">Jadwalkan Demo</a></li>
           <li><a href="#" class="text-white">Karir</a></li>
-          <li><a href="#" class="text-white">Login</a></li>
+          <li><a href="{{url('/login')}}" class="text-white">Login</a></li>
         </ul>
       </div>
 
@@ -84,8 +84,8 @@
         <ul class="list-unstyled">
           <li><a href="#" class="text-white">Cara Registrasi</a></li>
           <li><a href="#" class="text-white">Panduan Aplikasi</a></li>
-          <li><a href="#" class="text-white">Syarat & Ketentuan</a></li>
-          <li><a href="#" class="text-white">Kebijakan Privasi</a></li>
+          <li><a href="https://sites.google.com/view/uctadiv/halaman-muka" class="text-white">kebijakan kami</a></li>
+          <li><a href="{{url('/privacy-policy')}}" class="text-white">Kebijakan Privasi</a></li>
           <li><a href="#" class="text-white">Pengembalian Dana</a></li>
           <li><a href="#" class="text-white">Keamanan Layanan</a></li>
         </ul>
