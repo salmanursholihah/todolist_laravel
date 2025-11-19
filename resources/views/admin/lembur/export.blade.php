@@ -3,8 +3,6 @@
 
 <head>
     <title>Laporan lembur Users {{ $month }}/{{ $year }}</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
-     crossorigin="anonymous"></script>
     <style>
     table {
         width: 100%;

@@ -13,8 +13,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('assets/style/.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
-     crossorigin="anonymous"></script>
     @stack('styles')
 </head>
 

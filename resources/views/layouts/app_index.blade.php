@@ -16,8 +16,6 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/style/style_index2.css') }}">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
-     crossorigin="anonymous"></script>
     @stack('styles')
 </head>
 

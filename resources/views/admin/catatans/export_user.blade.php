@@ -23,8 +23,6 @@
             word-wrap: break-word;
         }
     </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
-     crossorigin="anonymous"></script>
 </head>
 <body>
     <h2>Laporan Catatan Users {{ htmlspecialchars($user['name'], ENT_QUOTES, 'UTF-8') }}</h2>
