@@ -9,16 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+      public function up(): void
     {
-    Schema::create('plans', function (Blueprint $table) {
-    $table->id();
-    $table->string('name');
-    $table->decimal('price', 10, 2);
-    $table->enum('billing_type', ['prabayar', 'pascabayar']);
-    $table->integer('duration_days')->nullable(); // hanya prabayar
-    $table->timestamps();
-});
+          Schema::create('plans', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->integer('price'); // dalam rupiah, misal 100000
+            $table->integer('duration_month'); // durasi langganan dalam bulan
+            $table->timestamps();
+        });
     }
 
     /**
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('plans');
     }
 };

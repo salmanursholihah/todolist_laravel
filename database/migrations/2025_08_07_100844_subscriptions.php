@@ -15,7 +15,6 @@ Schema::create('subscriptions', function (Blueprint $table) {
     $table->id();
     $table->foreignId('user_id')->constrained()->onDelete('cascade');
     $table->foreignId('plan_id')->constrained()->onDelete('cascade');
-    $table->date('start_date');
     $table->date('end_date')->nullable();
     $table->enum('status', ['pending', 'active', 'expired']);
     $table->timestamps();

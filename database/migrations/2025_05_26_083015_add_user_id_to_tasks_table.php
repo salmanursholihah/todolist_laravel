@@ -6,11 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class AddUserIdToTasksTable extends Migration
 {
-public function up()
+public function up(): void
 {
-Schema::table('tasks', function (Blueprint $table) {
-$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-});
+    Schema::table('tasks', function (Blueprint $table) {
+        $table->unsignedBigInteger('user_id'); // tambahkan kolom dulu
+
+        $table->foreign('user_id')
+              ->references('id')
+              ->on('users')
+              ->onDelete('cascade');
+    });
 }
 
 public function down()

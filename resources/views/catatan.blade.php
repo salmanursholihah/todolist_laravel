@@ -32,7 +32,7 @@
         </div>
 
         <!-- STEP 2 -->
-        <div id="step-2" style="display: none;">
+        <!-- <div id="step-2" style="display: none;">
             <h3>Form Evaluasi Bulanan</h3>
 
             <div class="mb-3">
@@ -52,7 +52,7 @@
         </div>
     </form>
 
-    <hr>
+    <hr> -->
 
     <h3>Riwayat Catatan</h3>
     <div class="row">
@@ -63,9 +63,9 @@
                     <h5>{{ $catatan->title }}</h5>
                     <p>{{ $catatan->created_at->format('d M Y') }}</p>
                     <p>{{ $catatan->description }}</p>
-                    <p><strong>Kendala:</strong> {{ $catatan->kendala }}</p>
+                    <!-- <p><strong>Kendala:</strong> {{ $catatan->kendala }}</p>
                     <p><strong>Solusi:</strong> {{ $catatan->solusi }}</p>
-                    <p><strong>Target:</strong> {{ $catatan->target }}</p>
+                    <p><strong>Target:</strong> {{ $catatan->target }}</p> -->
 
                     @foreach ($catatan->images as $image)
                     <img src="{{ asset($image->image_path) }}" class="img-fluid" style="max-height: 150px;">

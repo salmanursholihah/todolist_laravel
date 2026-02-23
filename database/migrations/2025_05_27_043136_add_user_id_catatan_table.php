@@ -11,12 +11,14 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-       Schema::table('catatan', function (Blueprint $table) {
-$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-}); 
-    }
+  public function up(): void
+{
+    Schema::table('catatans', function (Blueprint $table) {
+        $table->foreignId('user_id')
+              ->constrained()
+              ->onDelete('cascade');
+    });
+}
 
     /**
      * Reverse the migrations.
@@ -25,7 +27,7 @@ $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
      */
     public function down()
     {
-        Schema::table('catatan', function (Blueprint $table){
+        Schema::table('catatans', function (Blueprint $table){
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });
