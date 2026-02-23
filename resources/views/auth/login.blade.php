@@ -1,4 +1,4 @@
-@extends('layouts.app_auth')
+{{-- @extends('layouts.app_auth')
 
 @section('title', 'login')
 
@@ -35,4 +35,38 @@
         <a href="forgot-password">lupa password??</a>
     </form>
 </div>
+@endsection --}}
+
+
+@extends('layouts.app_auth')
+
+@section('title','Login')
+
+@section('content')
+
+<h2>Login</h2>
+<p class="subtitle">Masuk ke akun anda untuk melanjutkan</p>
+
+<form method="POST" action="{{ route('login') }}">
+    @csrf
+
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Email" required>
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Password" required>
+    </div>
+
+    <button type="submit">Login</button>
+
+    <div class="link">
+        <a href="{{ route('password.request') }}">Lupa Password?</a>
+    </div>
+
+    <div class="link">
+        Belum punya akun? <a href="{{ route('register') }}">Register</a>
+    </div>
+</form>
+
 @endsection

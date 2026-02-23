@@ -9,6 +9,7 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" name="email" id="email" class="form-control" required>
         </div>
+        <br>
         <button type="submit" class="btn btn-primary btn-primary w-100">Kirim Link Reset</button>
     </form>
 </div>

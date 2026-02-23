@@ -7,54 +7,93 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @stack('styles')
-    <style>
-        body {
-            background-color: #f9fafb;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<style>
+    body {
+        background: #f4f7fb;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .sidebar {
+        background: #ffffff;
+        border-right: 1px solid #eef2f7;
+        min-height: 100vh;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.03);
+    }
+
+    .sidebar h5 {
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .sidebar .nav-link {
+        font-weight: 500;
+        color: #6b7280;
+        padding: 10px 14px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar .nav-link:hover {
+        background: #eef2ff;
+        color: #2563eb;
+        transform: translateX(4px);
+    }
+
+    .sidebar .nav-link.active {
+        background: linear-gradient(135deg, #3b82f6, #2563eb);
+        color: #fff;
+    }
+
+    main {
+        padding: 30px;
+    }
+
+    /* Bottom nav mobile */
+    .bottom-nav {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
         .sidebar {
-            background: #fff;
-            border-right: 1px solid #e5e7eb;
-            min-height: 100vh;
-        }
-        .sidebar .nav-link {
-            font-weight: 500;
-            color: #374151;
-        }
-        .sidebar .nav-link.active, .sidebar .nav-link:hover {
-            background: #d1fae5;
-            color: #059669;
-            border-radius: 8px;
-        }
-        .bottom-nav {
             display: none;
         }
-        @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-            .bottom-nav {
-                display: flex;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                background: #fff;
-                border-top: 1px solid #e5e7eb;
-                justify-content: space-around;
-                padding: 0.5rem 0;
-                z-index: 50;
-            }
-            .bottom-nav a {
-                text-align: center;
-                color: #374151;
-                font-size: 0.8rem;
-            }
-            .bottom-nav a.active {
-                color: #059669;
-            }
+
+        main {
+            padding-bottom: 90px;
         }
-    </style>
+
+        .bottom-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            border-top: 1px solid #e5e7eb;
+            justify-content: space-around;
+            padding: 10px 0;
+            z-index: 50;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+
+        .bottom-nav a {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.75rem;
+            transition: 0.3s;
+        }
+
+        .bottom-nav a.active {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .bottom-nav i {
+            display: block;
+            margin-bottom: 4px;
+        }
+    }
+</style>
     @if(session('warning'))
     <div class="alert alert-warning">
         {{ session('warning') }}

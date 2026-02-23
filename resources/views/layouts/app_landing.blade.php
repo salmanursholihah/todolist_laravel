@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Absenpintar - Demo Landing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/style/style_index.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
         crossorigin="anonymous"></script>
-   
+
 
 </head>
 
@@ -46,7 +47,7 @@
         @yield('content')
     </main>
 
-
+<!--FOOTER-->
     <footer style="background-color:#44889c; color:white; padding-top:10px; margin-top:5px; padding-buttom:4px;">
         <div class="container">
             <div class="row">
@@ -116,6 +117,7 @@
             </div>
         </div>
     </footer>
+    <!--END FOOTER-->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
