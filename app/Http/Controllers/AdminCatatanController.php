@@ -14,14 +14,15 @@ public function index(Request $request)
 {
     $users = User::all();
 
-    // FILTER default = bulan ini
-    $bulan = now()->format('m'); // contoh: 07
-    $tahun = now()->format('Y'); // contoh: 2025
+    $bulan = now()->format('m');
+    $tahun = now()->format('Y');
 
-    $catatans = Catatan::whereMonth('created_at', $bulan)
+    $catatans = Catatan::with(['user', 'images'])
+                ->whereMonth('created_at', $bulan)
                 ->whereYear('created_at', $tahun)
                 ->latest()
-                ->paginate(10);
+                ->paginate(10)
+                ->withQueryString(); // penting kalau nanti ada filter
 
     return view('admin.catatans.index', compact('catatans', 'users', 'bulan', 'tahun'));
 }
