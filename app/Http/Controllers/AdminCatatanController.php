@@ -21,7 +21,7 @@ public function index(Request $request)
     $catatans = Catatan::whereMonth('created_at', $bulan)
                 ->whereYear('created_at', $tahun)
                 ->latest()
-                ->get();
+                ->paginate(10);
 
     return view('admin.catatans.index', compact('catatans', 'users', 'bulan', 'tahun'));
 }
