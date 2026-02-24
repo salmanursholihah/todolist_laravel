@@ -31,12 +31,13 @@
             <tr>
                 <th>User ID</th>
                 <th>Nama</th>
+                <th>Tanggal</th>
                 <th>Judul</th>
                 <th>Deskripsi</th>
                 <th>Target</th>
                 <th>Kendala</th>
                 <th>Solusi</th>
-                <th>Tanggal</th>
+              
             </tr>
         </thead>
         <tbody>
@@ -44,12 +45,12 @@
             <tr>
                 <td>{{ $catatan->user_id }}</td>
                 <td>{{ htmlspecialchars($catatan->user->name ?? 'username tidak ditemukan', ENT_QUOTES, 'UTF-8') }}</td>
+                <td>{{ $catatan->created_at->format('d-m-Y') }}</td>
                 <td>{{ htmlspecialchars($catatan->title, ENT_QUOTES, 'UTF-8') }}</td>
                 <td>{{ htmlspecialchars($catatan->description, ENT_QUOTES, 'UTF-8') }}</td>
                 <td>{{ htmlspecialchars($catatan->target, ENT_QUOTES, 'UTF-8') }}</td>
                 <td>{{ htmlspecialchars($catatan->kendala, ENT_QUOTES, 'UTF-8') }}</td>
                 <td>{{ htmlspecialchars($catatan->solusi, ENT_QUOTES, 'UTF-8') }}</td>
-                <td>{{ $catatan->created_at->format('d-m-Y') }}</td>
             </tr>
             @endforeach
         </tbody>

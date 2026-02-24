@@ -55,13 +55,13 @@
             <tr>
                 <th>User ID</th>
                 <th>Name</th>
+                <th>tanggal input</th>
                 <th>Title</th>
                 <th>Deskripsi</th>
                 <th>Gambar</th>
                 <th>target</th>
                 <th>kendala</th>
                 <th>solusi</th>
-                <th>tanggal input</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -70,6 +70,7 @@
             <tr>
                 <td>{{ $catatan->user_id }}</td>
                 <td>{{ $catatan->user->name ?? 'username tidak ditemukan' }}</td>
+                                <td>{{ $catatan->created_at->format('d F Y') }}</td>
                 <td>{{ $catatan->title }}</td>
                 <td>{{ $catatan->description }}</td>
                 <td>
@@ -84,7 +85,6 @@
                 <td>{{ $catatan->Target }}</td>
                 <td>{{ $catatan->kendala }}</td>
                 <td>{{ $catatan->solusi }}</td>
-                <td>{{ $catatan->created_at }}</td>
                 <td>
                     <a href="{{ route('admin.catatans.edit', $catatan->id) }}" class="btn btn-warning">Edit</a>
                     <form action="{{ route('admin.catatans.destroy', $catatan->id) }}" method="POST"

@@ -30,23 +30,25 @@
             <tr>
                 <th>user ID</th>
                 <th>name</th>
+                <th>tanggal input</th>
                 <th>title</th>
                 <th>deskripsi</th>
                 <th>target</th>
                 <th>permasalahan</th>
                 <th>uraian penyelesaian</th>
-                <th>tanggal input</th>
+             
             </tr>
             @foreach($catatans as $catatan)
             <tr>
                 <td>{{ $catatan->user_id }}</td>
                 <td>{{ $catatan->user->name ?? 'username tidak ditemukan' }}</td>
+                 <td>{{ $catatan->created_at->format('d-m-Y') }}</td>
                 <td>{{ $catatan->title }}</td>
                 <td>{{ $catatan->description }}</td>
                 <td>{{ $catatan->target }}</td>
                 <td>{{ $catatan->kendala }}</td>
                 <td>{{ $catatan->solusi }}</td>
-                <td>{{ $catatan->created_at}}</td>
+               
             </tr>
             @endforeach
 

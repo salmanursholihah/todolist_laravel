@@ -111,12 +111,13 @@
             <tr>
                 <th style="width: 5%;">User ID</th>
                 <th style="width: 10%;">Name</th>
+                <th style="width: 10%;">Tanggal Input</th>
                 <th style="width: 15%;">Title</th>
                 <th style="width: 20%;">Deskripsi</th>
                 <th style="width: 10%;">Target</th>
                 <th style="width: 10%;">Kendala</th>
                 <th style="width: 10%;">Solusi</th>
-                <th style="width: 10%;">Tanggal Input</th>
+          
             </tr>
         </thead>
         <tbody>
@@ -124,12 +125,13 @@
             <tr>
                 <td>{{ $catatan->user_id }}</td>
                 <td>{{ $catatan->user->name ?? 'N/A' }}</td>
+                <td>{{ $catatan->created_at->format('d-m-Y') }}</td>
                 <td>{{ $catatan->title }}</td>
                 <td>{{ $catatan->description }}</td>
                 <td>{{ $catatan->target }}</td>
                 <td>{{ $catatan->kendala }}</td>
                 <td>{{ $catatan->solusi }}</td>
-                <td>{{ $catatan->created_at }}</td>
+             
             </tr>
             @endforeach
         </tbody>
