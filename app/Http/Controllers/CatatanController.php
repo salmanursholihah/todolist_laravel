@@ -30,7 +30,7 @@ class CatatanController extends Controller
 
         return view('catatan', compact('catatans', 'showMonthlyForm'));
     }
-    
+
 public function store(Request $request)
 {
     $today   = now()->toDateString();

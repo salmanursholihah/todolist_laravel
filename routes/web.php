@@ -1,8 +1,6 @@
 <?php
-use App\Http\Controllers\TestMidtransController;
-use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -11,14 +9,11 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CatatanController;
 use App\Http\Controllers\AdminController;
-use App\Http\Middleware\CheckRole;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminCatatanController;
 use App\Http\Controllers\AdminKeuanganController;
 use App\Http\Controllers\KeuanganExportController;
-use App\Http\Controllers\TaskExportController;
 use App\Http\Controllers\CatatanExportController;
-use App\Http\Controllers\PencapaianBulananController;
 use App\Http\Controllers\TasksExportController;
 use App\Http\Controllers\UsersExportController;
 use App\Http\Controllers\MonthlyReportController;
@@ -30,16 +25,13 @@ use App\Http\Controllers\AdminLemburController;
 use App\Http\Controllers\VoiceNoteController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SubscriptionsController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\MidtransController;
-use App\Http\Controllers\TestMiddtransController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminSubscriptionController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\PesanController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PrivacyController;
@@ -56,10 +48,10 @@ use App\Http\Controllers\PrivacyController;
 
 
 // Login & Register
-Route::get('/register',[AuthController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/login',[AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -76,7 +68,7 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotForm
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
 
 
-//reset password 
+//reset password
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.update');
 
@@ -87,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/catatan/{catatan}', [CatatanController::class, 'update'])->name('catatan.update');
     Route::delete('/catatan/{catatan}', [CatatanController::class, 'destroy'])->name('catatan.destroy');
     // Route::get('/catatan/{id}/edit', [CatatanController::class, 'update'])->name('catatan.update');
-// Route::put('/catatan/{id}', [CatatanController::class, 'update'])->name('catatan.update');
+    // Route::put('/catatan/{id}', [CatatanController::class, 'update'])->name('catatan.update');
 
 
 
@@ -106,25 +98,24 @@ Route::get('/calendar', [CalendarController::class, 'index']);
 Route::get('/calendar/events', [CalendarController::class, 'getEvents']);
 
 //post2
-Route::get('/post', function(){
-    return view ('auth.post');
+Route::get('/post', function () {
+    return view('auth.post');
 });
 
 
 
 //keuangan user
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth'])->group(function () {
     Route::get('/keuangan', [KeuanganController::class, 'index'])->name('keuangan.index');
-Route::post('/keuangan', [KeuanganController::class, 'store'])->name('keuangan.store');
-Route::patch('/keuangan/{keuangan}', [KeuanganController::class, 'update'])->name('keuangan.update');
-Route::delete('/keuangan/{keuangan}', [KeuanganController::class, 'destroy'])->name('keuangan.destroy');
-Route::get('/keuangan/{keuangan}', [KeuanganController::class, 'show'])->name('keuangan.show');
-
+    Route::post('/keuangan', [KeuanganController::class, 'store'])->name('keuangan.store');
+    Route::patch('/keuangan/{keuangan}', [KeuanganController::class, 'update'])->name('keuangan.update');
+    Route::delete('/keuangan/{keuangan}', [KeuanganController::class, 'destroy'])->name('keuangan.destroy');
+    Route::get('/keuangan/{keuangan}', [KeuanganController::class, 'show'])->name('keuangan.show');
 });
 
 
-//index umum 
-Route::get ('/',function(){
+//index umum
+Route::get('/', function () {
     return view('home');
 });
 //routing export document
@@ -134,7 +125,7 @@ Route::get('/keuangan/export/pdf', [KeuanganExportController::class, 'exportPDF'
 //routing export document
 Route::get('/catatan/export/excel', [AdminCatatanController::class, 'exportExcel'])->name('catatan.export.excel');
 Route::get('/catatan/export/pdf', [AdminCatatanController::class, 'exportPDF'])->name('catatan.export.pdf');
-Route::post('/export-catatan', [AdminCatatanController::class, 'exportPerBulan' ])->name('export.perbulan');
+Route::post('/export-catatan', [AdminCatatanController::class, 'exportPerBulan'])->name('export.perbulan');
 Route::post('export-catatan-peruser', [AdminCatatanController::class, 'exportPerUser'])->name('export.peruser');
 
 
@@ -174,7 +165,7 @@ Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')-
 
 ///laporan catatan
 
-Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function(){
+Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('catatans', [AdminCatatanController::class, 'index'])->name('catatans.index');
     // Route::get('catatans/create', [AdminCatatanController::class, 'create'])->name('catatans.create');
     Route::post('catatans', [AdminCatatanController::class, 'store'])->name('catatans.store');
@@ -183,8 +174,10 @@ Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')-
     Route::delete('catatans/{catatan}', [AdminCatatanController::class, 'destroy'])->name('catatans.destroy');
 });
 
+
+
 //admin laporan_keuangan
-Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function(){
+Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('keuangans', [AdminKeuanganController::class, 'index'])->name('keuangans.index');
     // Route::get('keuangans/create', [AdminKeuanganController::class, 'create'])->name('keuangans.create');
     Route::post('keuangans', [AdminKeuanganController::class, 'store'])->name('keuangans.store');
@@ -205,9 +198,9 @@ Route::post('/monthly-report', [MonthlyReportController::class, 'store'])->name(
 
 
 //route
-Route::middleware(['auth', 'CheckRole:user'])->group(function(){
-   Route::get('/test/catatan', [TestCatatanController::class, 'index'])->name('test.catatans.index'); 
-   Route::post('/test/catatan', [TestCatatanController::class, 'store'])->name('test.catatans.store');
+Route::middleware(['auth', 'CheckRole:user'])->group(function () {
+    Route::get('/test/catatan', [TestCatatanController::class, 'index'])->name('test.catatans.index');
+    Route::post('/test/catatan', [TestCatatanController::class, 'store'])->name('test.catatans.store');
 });
 
 
@@ -224,16 +217,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('chat/{receiverId}', [MessageController::class, 'chatWithUser'])->name('chat.show');
     Route::post('chat/send', [MessageController::class, 'send'])->name('chat.send');
     Route::get('chat/voice', [MessageController::class, 'storevoice'])->name('chat.voice');
-
 });
 
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-Route::prefix('admin')->middleware(['auth', 'CheckRole:admin'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'CheckRole:admin'])->group(function () {
     Route::get('profile', [ProfileController::class, 'showadmin'])->name('admin.profile.show');
     Route::put('profile', [ProfileController::class, 'updateadmin'])->name('admin.profile.update');
 });
@@ -265,7 +257,6 @@ Route::middleware(['auth', 'CheckRole:admin'])->prefix('admin')->name('admin.')-
     Route::post('/lembur/{id}/reject', [AdminLemburController::class, 'reject'])->name('lembur.reject');
     Route::get('lembur/bonus', [AdminLemburController::class, 'showBonus'])->name('lembur.bonus');
     Route::put('setting/lembur', [AdminLemburController::class, 'updateLembur'])->name('setting.lembur.update');
-
 });
 
 ///download laporan lembur
@@ -278,7 +269,7 @@ Route::post('/voice-note/upload', [VoiceNoteController::class, 'upload']);
 
 
 ///absensi kamera
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth'])->group(function () {
     Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.index');
     Route::post('/absensi', [AbsensiController::class, 'store'])->name('absensi.store');
 });
@@ -288,7 +279,7 @@ Route::middleware(['auth'])->group(function(){
 ///halaman lembur interaktif
 // Route::get('/lembur-interaktif', function () {
 //     return view('lembur');
-// })->middleware('auth')->name('lembur');  
+// })->middleware('auth')->name('lembur');
 
 
 
@@ -306,7 +297,7 @@ Route::middleware(['auth'])->group(function(){
 //         'email' => 'required|email',
 //         'pesan' => 'required',
 //     ]);
-    
+
 //     // proses kirim email / simpan log
 //     Log::info('Pesan kontak:', $validated);
 
@@ -326,7 +317,7 @@ Route::prefix('admin')->group(function () {
 
 
 ///blog
-//    
+//
 
 // Halaman list
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
@@ -336,7 +327,7 @@ Route::get('/blog/{id}', [BlogController::class, 'show'])->where('id', '[0-9]+')
 
 
 //halaman panduan
-Route::get('/panduan', function (){
+Route::get('/panduan', function () {
     return view('panduan');
 });
 
@@ -363,14 +354,13 @@ Route::get('/panduan', function (){
 
 
 
-Route::middleware(['auth'])->group(function() {
-    Route::get('/plans', [PlanController::class,'index'])->name('plans.index');
-    Route::post('/checkout', [PaymentController::class,'checkout'])->name('checkout');
-    
+Route::middleware(['auth'])->group(function () {
+    Route::get('/plans', [PlanController::class, 'index'])->name('plans.index');
+    Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
 });
 
 // Midtrans notification (no csrf)
-Route::post('/midtrans/notification', [MidtransController::class,'notificationHandler'])->name('midtrans.notification');
+Route::post('/midtrans/notification', [MidtransController::class, 'notificationHandler'])->name('midtrans.notification');
 
 
 
@@ -392,7 +382,7 @@ Route::post('/midtrans/notification', [MidtransController::class,'notificationHa
 
 
 
-// //menghubungkan fitur absensi dengan fitur langganan 
+// //menghubungkan fitur absensi dengan fitur langganan
 // Route::middleware(['auth', 'check.subscription'])->group(function () {
 //     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 // });
@@ -400,7 +390,7 @@ Route::post('/midtrans/notification', [MidtransController::class,'notificationHa
 
 
 // Langganan
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     Route::get('/subscription/select-plan', [SubscriptionsController::class, 'selectPlan'])->name('subscription.selectPlan');
     Route::post('/subscription/select-plan', [SubscriptionsController::class, 'postSelectPlan']);
     Route::get('/subscription/step/{step}', [SubscriptionsController::class, 'showStep'])->name('subscription.step');
@@ -420,7 +410,7 @@ Route::middleware(['auth', 'check.subscription'])->group(function () {
 
 
 ////backend
-Route::middleware(['auth', 'CheckRole:admin'])->group(function() {
+Route::middleware(['auth', 'CheckRole:admin'])->group(function () {
     Route::get('/admin/subscriptions', [AdminSubscriptionController::class, 'index'])->name('admin.subscriptions.index');
     Route::post('/admin/subscriptions/{id}/activate', [AdminSubscriptionController::class, 'activate'])->name('admin.subscriptions.activate');
 });
