@@ -47,7 +47,7 @@
         @yield('content')
     </main>
 
-<!--FOOTER-->
+    {{-- <!--FOOTER-->
     <footer style="background-color:#44889c; color:white; padding-top:10px; margin-top:5px; padding-buttom:4px;">
         <div class="container">
             <div class="row">
@@ -90,13 +90,12 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5>Layanan</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white">Cara Registrasi</a></li>
-                        <li><a href="#" class="text-white">Panduan Aplikasi</a></li>
+                        <li><a href="{{ url('/panduan') }}" class="text-white">Cara Registrasi</a></li>
+                        <li><a href="{{ url('/panduan') }}" class="text-white">Panduan Aplikasi</a></li>
                         <li><a href="https://sites.google.com/view/uctadiv/halaman-muka" class="text-white">kebijakan
                                 kami</a></li>
                         <li><a href="{{ url('/privacy-policy') }}" class="text-white">Kebijakan Privasi</a></li>
-                        <li><a href="#" class="text-white">Pengembalian Dana</a></li>
-                        <li><a href="#" class="text-white">Keamanan Layanan</a></li>
+
                     </ul>
                 </div>
 
@@ -114,6 +113,88 @@
             <hr class="border-secondary" />
             <div class="text-center mt-3" style="font-weight: bold;">
                 &copy; 2025 Absen Pintar - Hak cipta dilindungi.
+            </div>
+        </div>
+    </footer>
+    <!--END FOOTER-->
+ --}}
+
+
+    <!--cod efooter 2-->
+
+    <!--FOOTER-->
+    <footer style="background:#f1f6ff; color:#1e293b; padding-top:40px; margin-top:60px; border-top:1px solid #e2e8f0;">
+        <div class="container">
+            <div class="row">
+
+                <!-- Logo dan alamat -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="logo-uct.png" alt="UCT Logo" style="width:150px;">
+                    <p class="mt-3" style="color:#64748b;">
+                        Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02,<br>
+                        Magelang, Jawa Tengah
+                    </p>
+                    <p style="color:#64748b;">📱 0812 3467 858</p>
+                    <p style="color:#64748b;">📧 halo@uct.com</p>
+
+                    <div class="d-flex gap-3 mt-2">
+                        <a href="#"><img src="{{ asset('storage/logo/logo-facebook.jpg') }}" width="24"></a>
+                        <a href="#"><img src="{{ asset('storage/logo/logo-twitter.jpg') }}" width="24"></a>
+                        <a href="https://www.tiktok.com/@ospod67?_t=ZS-8ycKl7yOd2G&_r=1">
+                            <img src="{{ asset('storage/logo/logo-tiktok.jpg') }}" width="24">
+                        </a>
+                        <a href="https://www.instagram.com/pt_utama_ciptatataasri?igsh=MTc1a3Vnem9qN2NvbQ==">
+                            <img src="{{ asset('storage/logo/logo-instagram.jpg') }}" width="24">
+                        </a>
+                        <a href="https://youtube.com/@ospod-milos?si=pJO2FPcFW9RLsaY9">
+                            <img src="{{ asset('storage/logo/logo-youtube.jpg') }}" width="24">
+                        </a>
+                        <a href="#"><img src="{{ asset('storage/logo/logo-linkedin.jpg') }}" width="24"></a>
+                    </div>
+                </div>
+
+                <!-- Menu links 1 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 style="color:#2563eb; font-weight:600;">Tentang Kami</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url('/about') }}" class="footer-link">Tentang</a></li>
+                        <li><a href="{{ url('/blog') }}" class="footer-link">Blog</a></li>
+                        <li><a href="{{ url('/kontak') }}" class="footer-link">FAQ</a></li>
+                        <li><a href="#" class="footer-link">Jadwalkan Demo</a></li>
+                        <li><a href="#" class="footer-link">Karir</a></li>
+                        <li><a href="{{ url('/login') }}" class="footer-link">Login</a></li>
+                    </ul>
+                </div>
+
+                <!-- Menu links 2 -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 style="color:#2563eb; font-weight:600;">Layanan</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url('/panduan') }}" class="footer-link">Cara Registrasi</a></li>
+                        <li><a href="{{ url('/panduan') }}" class="footer-link">Panduan Aplikasi</a></li>
+                        <li><a href="https://sites.google.com/view/uctadiv/halaman-muka" class="footer-link">Kebijakan
+                                Kami</a></li>
+                        <li><a href="https://sites.google.com/view/uctadivmyid/halaman-muka"
+                                class="footer-link">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Google maps -->
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 style="color:#2563eb; font-weight:600;">Lokasi</h5>
+                    <div class="ratio ratio-4x3" style="border-radius:10px; overflow:hidden;">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.606862730542!2d110.21981317500169!3d-7.465586392545967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a8f06c1ce38eb%3A0xb67783d2e0568c26!2sPJKA%204%20(BKW)!5e1!3m2!1sid!2sid!4v1754383919161!5m2!1sid!2sid"
+                            style="border:0;" allowfullscreen loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <hr style="border-color:#e2e8f0;" />
+
+            <div class="text-center mt-3" style="color:#64748b;">
+                © 2025 UCT Activity Plan - Hak cipta dilindungi.
             </div>
         </div>
     </footer>
