@@ -4,204 +4,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absenpintar - Demo Landing</title>
+
+    <title>UCT Activity Plan</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Style Custom -->
     <link rel="stylesheet" href="{{ asset('assets/style/style_index.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Google Adsense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7858281078425614"
         crossorigin="anonymous"></script>
 
 
+    <style>
+        /* =========================
+HEADER
+========================= */
+
+        .main-header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1200px;
+            z-index: 1000;
+            transition: all .3s ease;
+        }
+
+        .main-header.scrolled {
+            top: 0;
+            width: 100%;
+            max-width: 100%;
+            border-radius: 0;
+            background: #ffffff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            transition: all .3s ease;
+        }
+
+        .main-header.scrolled nav {
+            background: transparent;
+            border: none;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #2563eb;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        .nav-link:hover {
+            color: #2563eb;
+        }
+
+        .contact-button {
+            background: #2563eb;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+        }
+
+        .contact-button:hover {
+            background: #1e40af;
+            color: white;
+        }
+
+
+        /* =========================
+MAIN SPACING
+========================= */
+
+        main {
+            padding-top: 130px;
+        }
+
+
+        /* =========================
+FOOTER
+========================= */
+
+        .footer-link {
+            text-decoration: none;
+            color: #64748b;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .footer-link:hover {
+            color: #2563eb;
+        }
+
+
+        /* =========================
+RESPONSIVE
+========================= */
+
+        @media(max-width:768px) {
+
+            .nav-menu {
+                display: none;
+            }
+
+            main {
+                padding-top: 140px;
+            }
+
+        }
+    </style>
+
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-#44889c shadow-sm py-4 ">
-        <div class="container">
-            <a class="navbar-brand" style="font-weight:bold; font-family:arial">Absen Pintar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse font-weight-bold" id="navbarNav">
-                <ul class="navbar-nav ms-auto ">
-                    <li class="nav-item"><a href="{{ url('/') }}" class="nav-link">beranda</a></li>
-                    <li class="nav-item"><a href="{{ url('/about') }}" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="{{ url('/subscription/select-plan') }}" class="nav-link">Fitur</a>
-                    </li>
-                    <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="{{ url('/panduan') }}" class="nav-link">Panduan</a></li>
-                    <li class="nav-item"><a href="{{ url('/kontak') }}" class="nav-link">Kontak</a></li>
-                    <li class="nav-item"><a href="{{ url('/dashboard') }}" class="nav-link">Absensi</a></li>
-                    <li class="nav-item"><a href="{{ url('/register') }}" class="nav-link">Daftar</a></li>
-                    <li class="nav-item"><a href="{{ url('/login') }}" class="nav-link">Masuk</a></li>
-                    <li class="nav-item">
-                        <a href="#" class="btn btn-primary">Coba Gratis</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+
+
+
+    <!-- =========================
+NAVBAR
+========================= -->
+
+    <header class="main-header">
+
+        <nav class="container">
+
+            <a href="#" class="logo">UCTA</a>
+
+            <ul class="nav-menu">
+
+                <li><a href="{{ url('/') }}" class="nav-link">Beranda</a></li>
+
+                <li><a href="{{ url('/about') }}" class="nav-link">About</a></li>
+
+                <li><a href="{{ url('/subscription/select-plan') }}" class="nav-link">Fitur</a></li>
+
+                <li><a href="{{ url('/blog') }}" class="nav-link">Blog</a></li>
+
+                <li><a href="{{ url('/panduan') }}" class="nav-link">Panduan</a></li>
+
+                <li><a href="{{ url('/kontak') }}" class="nav-link">Kontak</a></li>
+
+                <li><a href="{{ url('/dashboard') }}" class="nav-link">Activity</a></li>
+
+                <li><a href="{{ url('/register') }}" class="nav-link">Daftar</a></li>
+
+                <li><a href="{{ url('/login') }}" class="nav-link">Masuk</a></li>
+
+                <li>
+                    <a href="#" class="contact-button">Coba Gratis</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+MAIN CONTENT
+========================= -->
+
     <main>
+
         @yield('content')
+
     </main>
 
-    {{-- <!--FOOTER-->
-    <footer style="background-color:#44889c; color:white; padding-top:10px; margin-top:5px; padding-buttom:4px;">
-        <div class="container">
-            <div class="row">
-
-                <!-- Logo dan alamat -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <img src="logo-uct.png" alt="Absen pintar Logo" style="width:150px;">
-                    <p class="mt-3">
-                        Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02,<br> Magelang, Jawa Tengah
-                    </p>
-                    <p>📱 0812 3467 858</p>
-                    <p>📧 halo@uct.com</p>
-                    <div class="d-flex gap-2">
-                        <a href="#"><img src="{{ asset('storage/logo/logo-facebook.jpg') }}" width="24"></a>
-                        <a href="#"><img src="{{ asset('storage/logo/logo-twitter.jpg') }}" width="24"></a>
-                        <a href="https://www.tiktok.com/@ospod67?_t=ZS-8ycKl7yOd2G&_r=1"><img
-                                src="{{ asset('storage/logo/logo-tiktok.jpg') }}" width="24"></a>
-                        <a href="https://www.instagram.com/pt_utama_ciptatataasri?igsh=MTc1a3Vnem9qN2NvbQ=="><img
-                                src="{{ asset('storage/logo/logo-instagram.jpg') }}" width="24"></a>
-                        <a href="https://youtube.com/@ospod-milos?si=pJO2FPcFW9RLsaY9"><img
-                                src="{{ asset('storage/logo/logo-youtube.jpg') }}" width="24"></a>
-                        <a href="#"><img src="{{ asset('storage/logo/logo-linkedin.jpg') }}" width="24"></a>
-                    </div>
-                </div>
-
-                <!-- Menu links 1 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5>Tentang Kami</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ url('/about') }}" class="text-white">Tentang</a></li>
-                        <li><a href="{{ url('/blog') }}" class="text-white">Blog</a></li>
-                        <li><a href="{{ url('/kontak') }}" class="text-white">FAQ</a></li>
-                        <li><a href="#" class="text-white">Jadwalkan Demo</a></li>
-                        <li><a href="#" class="text-white">Karir</a></li>
-                        <li><a href="{{ url('/login') }}" class="text-white">Login</a></li>
-                    </ul>
-                </div>
-
-                <!-- Menu links 2 -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5>Layanan</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ url('/panduan') }}" class="text-white">Cara Registrasi</a></li>
-                        <li><a href="{{ url('/panduan') }}" class="text-white">Panduan Aplikasi</a></li>
-                        <li><a href="https://sites.google.com/view/uctadiv/halaman-muka" class="text-white">kebijakan
-                                kami</a></li>
-                        <li><a href="{{ url('/privacy-policy') }}" class="text-white">Kebijakan Privasi</a></li>
-
-                    </ul>
-                </div>
-
-                <!-- Google maps -->
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5>Lokasi</h5>
-                    <div class="ratio ratio-4x3">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.606862730542!2d110.21981317500169!3d-7.465586392545967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a8f06c1ce38eb%3A0xb67783d2e0568c26!2sPJKA%204%20(BKW)!5e1!3m2!1sid!2sid!4v1754383919161!5m2!1sid!2sid"
-                            style="border:0;" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="border-secondary" />
-            <div class="text-center mt-3" style="font-weight: bold;">
-                &copy; 2025 Absen Pintar - Hak cipta dilindungi.
-            </div>
-        </div>
-    </footer>
-    <!--END FOOTER-->
- --}}
 
 
-    <!--cod efooter 2-->
+    <!-- =========================
+FOOTER
+========================= -->
 
-    <!--FOOTER-->
     <footer style="background:#f1f6ff; color:#1e293b; padding-top:40px; margin-top:60px; border-top:1px solid #e2e8f0;">
+
         <div class="container">
+
             <div class="row">
 
-                <!-- Logo dan alamat -->
+
+                <!-- Logo -->
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <img src="logo-uct.png" alt="UCT Logo" style="width:150px;">
+
+                    <img src="{{ asset('storage/logo/logo-uct.png') }}" width="150">
+
                     <p class="mt-3" style="color:#64748b;">
-                        Jl. Ahmad Yani Perum PJKA No.4, RT.03/RW.02,<br>
+                        Jl. Ahmad Yani Perum PJKA No.4,<br>
                         Magelang, Jawa Tengah
                     </p>
+
                     <p style="color:#64748b;">📱 0812 3467 858</p>
                     <p style="color:#64748b;">📧 halo@uct.com</p>
 
-                    <div class="d-flex gap-3 mt-2">
-                        <a href="#"><img src="{{ asset('storage/logo/logo-facebook.jpg') }}" width="24"></a>
-                        <a href="#"><img src="{{ asset('storage/logo/logo-twitter.jpg') }}" width="24"></a>
-                        <a href="https://www.tiktok.com/@ospod67?_t=ZS-8ycKl7yOd2G&_r=1">
-                            <img src="{{ asset('storage/logo/logo-tiktok.jpg') }}" width="24">
-                        </a>
-                        <a href="https://www.instagram.com/pt_utama_ciptatataasri?igsh=MTc1a3Vnem9qN2NvbQ==">
-                            <img src="{{ asset('storage/logo/logo-instagram.jpg') }}" width="24">
-                        </a>
-                        <a href="https://youtube.com/@ospod-milos?si=pJO2FPcFW9RLsaY9">
-                            <img src="{{ asset('storage/logo/logo-youtube.jpg') }}" width="24">
-                        </a>
-                        <a href="#"><img src="{{ asset('storage/logo/logo-linkedin.jpg') }}" width="24"></a>
-                    </div>
                 </div>
 
-                <!-- Menu links 1 -->
+
+                <!-- Tentang -->
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 style="color:#2563eb; font-weight:600;">Tentang Kami</h5>
+
+                    <h5 style="color:#2563eb;font-weight:600;">Tentang Kami</h5>
+
                     <ul class="list-unstyled">
+
                         <li><a href="{{ url('/about') }}" class="footer-link">Tentang</a></li>
+
                         <li><a href="{{ url('/blog') }}" class="footer-link">Blog</a></li>
+
                         <li><a href="{{ url('/kontak') }}" class="footer-link">FAQ</a></li>
+
                         <li><a href="#" class="footer-link">Jadwalkan Demo</a></li>
-                        <li><a href="#" class="footer-link">Karir</a></li>
+
                         <li><a href="{{ url('/login') }}" class="footer-link">Login</a></li>
+
                     </ul>
+
                 </div>
 
-                <!-- Menu links 2 -->
+
+
+                <!-- Layanan -->
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 style="color:#2563eb; font-weight:600;">Layanan</h5>
+
+                    <h5 style="color:#2563eb;font-weight:600;">Layanan</h5>
+
                     <ul class="list-unstyled">
+
                         <li><a href="{{ url('/panduan') }}" class="footer-link">Cara Registrasi</a></li>
+
                         <li><a href="{{ url('/panduan') }}" class="footer-link">Panduan Aplikasi</a></li>
-                        <li><a href="https://sites.google.com/view/uctadiv/halaman-muka" class="footer-link">Kebijakan
-                                Kami</a></li>
-                        <li><a href="https://sites.google.com/view/uctadivmyid/halaman-muka"
-                                class="footer-link">Kebijakan Privasi</a></li>
+
+                        <li>
+                            <a href="https://sites.google.com/view/uctadiv/halaman-muka" class="footer-link">
+                                Kebijakan Kami
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://sites.google.com/view/uctadivmyid/halaman-muka" class="footer-link">
+                                Kebijakan Privasi
+                            </a>
+                        </li>
+
                     </ul>
+
                 </div>
 
-                <!-- Google maps -->
+
+
+                <!-- Maps -->
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 style="color:#2563eb; font-weight:600;">Lokasi</h5>
-                    <div class="ratio ratio-4x3" style="border-radius:10px; overflow:hidden;">
+
+                    <h5 style="color:#2563eb;font-weight:600;">Lokasi</h5>
+
+                    <div class="ratio ratio-4x3" style="border-radius:10px;overflow:hidden;">
+
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.606862730542!2d110.21981317500169!3d-7.465586392545967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a8f06c1ce38eb%3A0xb67783d2e0568c26!2sPJKA%204%20(BKW)!5e1!3m2!1sid!2sid!4v1754383919161!5m2!1sid!2sid"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.606862730542!2d110.21981317500169!3d-7.465586392545967"
                             style="border:0;" allowfullscreen loading="lazy">
                         </iframe>
+
                     </div>
+
                 </div>
+
+
             </div>
 
-            <hr style="border-color:#e2e8f0;" />
+
+            <hr style="border-color:#e2e8f0;">
+
 
             <div class="text-center mt-3" style="color:#64748b;">
-                © 2025 UCT Activity Plan - Hak cipta dilindungi.
-            </div>
-        </div>
-    </footer>
-    <!--END FOOTER-->
 
+                © 2025 UCT Activity Plan - Hak cipta dilindungi.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================
+JS
+========================= -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        window.addEventListener("scroll", function() {
+
+            const header = document.querySelector(".main-header");
+
+            if (window.scrollY > 50) {
+
+                header.classList.add("scrolled");
+
+            } else {
+
+                header.classList.remove("scrolled");
+
+            }
+
+        });
+    </script>
+
+
 </body>
 
 </html>
